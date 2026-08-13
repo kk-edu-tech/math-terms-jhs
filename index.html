@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>中学生のための数学｜1年数学用語検索 v2</title>
+<meta name="description" content="中学校1年数学の100用語を、単元・キーワードから検索できる学習サイト">
+<style>
+:root{
+  --blue:#1672f3;--blue-dark:#0f57c7;--navy:#0b1f4d;--soft:#eef6ff;
+  --line:#d9e8fb;--muted:#64748b;--bg:#f6f9ff;--orange:#e98516;
+  --warn:#fff4d8;--ok:#eaf8ef;--shadow:0 16px 42px rgba(15,87,199,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--navy);font-family:"BIZ UDPGothic","Yu Gothic UI","Yu Gothic","Hiragino Kaku Gothic ProN",Meiryo,system-ui,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.header-inner{max-width:1180px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;color:var(--navy);text-decoration:none}
+.logo{width:35px;height:35px;border-radius:10px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:22px}
+.header-note{color:var(--muted);font-size:13px;font-weight:900}
+main{max-width:1180px;margin:auto;padding:34px 20px 80px}
+.hero{display:grid;grid-template-columns:1.4fr .8fr;gap:24px;align-items:stretch;margin-bottom:26px}
+.hero-main,.hero-card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.hero-main{padding:34px}
+.eyebrow{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--soft);color:var(--blue-dark);font-weight:900;font-size:14px}
+h1{margin:14px 0 10px;font-size:clamp(38px,5vw,62px);line-height:1.12;letter-spacing:-.04em}
+.marker{color:var(--blue)}
+.hero p{margin:0;color:#425466;font-size:18px;line-height:1.8;font-weight:700}
+.hero-card{padding:24px;display:flex;flex-direction:column;justify-content:center}
+.stat{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0;border-bottom:1px solid #edf3f9}
+.stat:last-child{border-bottom:0}
+.stat b{font-size:30px;color:var(--blue)}.stat span{color:var(--muted);font-weight:800}
+.search-panel{position:sticky;top:60px;z-index:15;background:rgba(246,249,255,.96);padding:12px 0 14px;backdrop-filter:blur(10px)}
+.search-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 8px 28px rgba(15,87,199,.06)}
+.search-row{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:10px}
+.search-row input,.search-row select{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:#fff;color:var(--navy);font-weight:800}
+.search-row input:focus,.search-row select:focus{outline:3px solid #cfe4ff;border-color:#8bbcf8}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font-weight:900;color:var(--navy)}
+.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 2px 14px}
+.section-head h2{margin:0;font-size:29px}.count{color:var(--muted);font-weight:900}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.term-card{border:1px solid var(--line);background:#fff;border-radius:17px;padding:18px;text-align:left;box-shadow:0 8px 22px rgba(15,87,199,.05);transition:.18s ease;min-height:176px;display:flex;flex-direction:column}
+.term-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(15,87,199,.10);border-color:#afd0fa}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:900;background:var(--soft);color:var(--blue-dark)}
+.pill.warn{background:var(--warn);color:#8a4b00}
+.term-card h3{margin:0 0 9px;font-size:23px;line-height:1.35}
+.term-card p{margin:0;color:#425466;font-weight:700;line-height:1.65}
+.card-bottom{margin-top:auto;padding-top:14px;color:var(--blue);font-weight:900;font-size:13px}
+.empty{grid-column:1/-1;background:#fff;border:1px dashed #b9d5f8;border-radius:18px;padding:34px;text-align:center;color:var(--muted);font-weight:900}
+.overlay{position:fixed;inset:0;display:none;place-items:center;background:rgba(11,31,77,.25);z-index:50;padding:18px}
+.overlay.open{display:grid}
+.detail{width:min(760px,96vw);max-height:88vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 28px 80px rgba(11,31,77,.25);padding:25px}
+.detail-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.detail h2{margin:8px 0 0;font-size:clamp(34px,5vw,50px);line-height:1.15}
+.close{border:1px solid var(--line);background:var(--soft);color:var(--navy);border-radius:12px;width:42px;height:42px;font-size:26px;font-weight:900}
+.detail-summary{font-size:22px;line-height:1.75;font-weight:800;color:#233a59;margin:22px 0}
+.formula{min-height:0;border-radius:16px;background:#f9fbff;border:1px solid var(--line);padding:20px;text-align:center;font-size:28px;font-weight:900;margin:14px 0}
+.formula:empty{display:none}
+.block-title{font-size:13px;color:var(--muted);font-weight:900;letter-spacing:.08em;margin:20px 0 8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid #bfd8f8;background:#fff;color:var(--blue-dark);padding:8px 11px;border-radius:999px;font-weight:900}
+.keyword{cursor:default;color:#425466;background:#f8fbff}
+.notice{margin-top:18px;padding:12px 14px;border-radius:14px;background:var(--warn);color:#784600;font-weight:800;line-height:1.6}
+footer{max-width:1180px;margin:auto;padding:0 20px 36px;color:var(--muted);font-weight:700;line-height:1.7}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){main{padding:20px 12px 70px}.header-inner{padding:10px 12px}.header-note{display:none}.hero-main{padding:24px}.search-panel{top:54px}.search-row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.detail{padding:20px}.detail-summary{font-size:20px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.slide-link-wrap{margin-top:18px}
+.slide-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1px solid var(--blue);background:var(--blue);color:#fff;text-decoration:none;border-radius:14px;padding:14px 16px;font-size:20px;font-weight:900;box-shadow:0 10px 24px rgba(22,114,243,.18)}
+.slide-link:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
+
+</style>
+<script>
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  chtml:{scale:1.02}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#"><span class="logo">∑</span><span>中学生のための数学</span></a>
+    <span class="header-note">1年数学用語｜100語統合版 v2</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-main">
+      <span class="eyebrow">🔎 用語から数学を理解する</span>
+      <h1>数学用語を、<br><span class="marker">見てわかる。</span></h1>
+      <p>中学1年の100用語を、単元・ことば・意味から探せます。用語を押すと、一言説明・数式・関連用語をまとめて確認できます。</p>
+    </div>
+    <aside class="hero-card">
+      <div class="stat"><span>収録用語</span><b>100</b></div>
+      <div class="stat"><span>一言説明 OK</span><b>99</b></div>
+      <div class="stat"><span>要修正</span><b>1</b></div>
+      <div class="stat"><span>単元</span><b>7</b></div>
+    </aside>
+  </section>
+
+  <section class="search-panel">
+    <div class="search-box">
+      <div class="search-row">
+        <input id="q" type="search" placeholder="例：比例、マイナス、直角、中央値…">
+        <select id="unitSelect">
+          <option value="all">すべての単元</option>
+          <option value="g1-seifu">正の数・負の数</option><option value="g1-moji">文字の式</option><option value="g1-hoteishiki">方程式</option><option value="g1-henkatotaiou">比例・反比例</option><option value="g1-heimen">平面図形</option><option value="g1-kukan">空間図形</option><option value="g1-data">データの活用</option>
+        </select>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-status="all">すべて</button>
+        <button class="tab" data-status="ok">内容確認済み</button>
+        <button class="tab" data-status="revise">要修正</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>1年生の数学用語</h2>
+    <div class="count" id="count"></div>
+  </div>
+  <section class="grid" id="grid"></section>
+</main>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <section class="detail" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="detail-top">
+      <div>
+        <div class="card-meta" id="detailMeta"></div>
+        <h2 id="detailTitle"></h2>
+      </div>
+      <button class="close" id="closeBtn" aria-label="閉じる">×</button>
+    </div>
+    <p class="detail-summary" id="detailSummary"></p>
+    <div class="formula" id="detailFormula"></div>
+    <div id="keywordBlock">
+      <div class="block-title">検索キーワード</div>
+      <div class="chips" id="keywords"></div>
+    </div>
+    <div id="relatedBlock">
+      <div class="block-title">関連用語</div>
+      <div class="chips" id="related"></div>
+    </div>
+    <div class="slide-link-wrap" id="slideLinkBlock" hidden></div>
+    <div class="notice" id="notice" hidden>この用語の一言説明は「要修正」判定です。現在のレビュー文をそのまま表示しています。</div>
+  </section>
+</div>
+
+<footer>
+  数式はオンライン時にMathJaxで表示します。検索・絞り込み・用語詳細は静的HTMLだけで動作し、GitHub Pagesへそのまま配置できます。
+</footer>
+
+<script>
+const TERMS=[{"id": "g1-t001", "name": "正の数", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "0より大きい数。", "status": "ok", "formula": "", "keywords": ["プラス", "0より大きい", "正", "数直線"], "related": ["g1-t002", "g1-t004", "g1-t005", "g1-t006"], "relatedNames": ["負の数", "符号", "数直線", "絶対値"]}, {"id": "g1-t002", "name": "負の数", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "0より小さい数。", "status": "ok", "formula": "", "keywords": ["マイナス", "0より小さい", "負", "数直線"], "related": ["g1-t001", "g1-t004", "g1-t005", "g1-t006"], "relatedNames": ["正の数", "符号", "数直線", "絶対値"]}, {"id": "g1-t003", "name": "自然数", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "1、2、3、…のような正の整数。", "status": "ok", "formula": "", "keywords": ["正の整数", "整数", "1,2,3"], "related": [], "relatedNames": []}, {"id": "g1-t004", "name": "符号", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数が正か負かを表す「＋」「−」の記号。", "status": "ok", "formula": "", "keywords": ["＋", "−", "プラス", "マイナス", "正負"], "related": ["g1-t001", "g1-t002", "g1-t005", "g1-t006"], "relatedNames": ["正の数", "負の数", "数直線", "絶対値"]}, {"id": "g1-t005", "name": "数直線", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数を一直線上の位置で表したもの。", "status": "ok", "formula": "", "keywords": ["数", "位置", "0", "原点", "右", "左"], "related": ["g1-t001", "g1-t002", "g1-t004", "g1-t006"], "relatedNames": ["正の数", "負の数", "符号", "絶対値"]}, {"id": "g1-t006", "name": "絶対値", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数直線上で、ある数から0までの距離。", "status": "ok", "formula": "\\[|a|\\]", "keywords": ["距離", "0", "数直線", "| |"], "related": ["g1-t001", "g1-t002", "g1-t004", "g1-t005"], "relatedNames": ["正の数", "負の数", "符号", "数直線"]}, {"id": "g1-t007", "name": "反対の性質をもつ量", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "増加と減少、東と西のように、反対向きに表せる量。", "status": "ok", "formula": "", "keywords": ["増加", "減少", "東", "西", "反対", "向き"], "related": [], "relatedNames": []}, {"id": "g1-t008", "name": "加法", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数をたす計算。", "status": "ok", "formula": "", "keywords": ["たし算", "足し算", "和"], "related": ["g1-t009", "g1-t012", "g1-t013"], "relatedNames": ["減法", "和", "差"]}, {"id": "g1-t009", "name": "減法", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数をひく計算。", "status": "ok", "formula": "", "keywords": ["ひき算", "引き算", "差"], "related": ["g1-t008", "g1-t012", "g1-t013"], "relatedNames": ["加法", "和", "差"]}, {"id": "g1-t010", "name": "乗法", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数をかける計算。", "status": "ok", "formula": "", "keywords": ["かけ算", "掛け算", "積"], "related": ["g1-t011", "g1-t014", "g1-t015"], "relatedNames": ["除法", "積", "商"]}, {"id": "g1-t011", "name": "除法", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "数でわる計算。", "status": "ok", "formula": "", "keywords": ["わり算", "割り算", "商"], "related": ["g1-t010", "g1-t014", "g1-t015"], "relatedNames": ["乗法", "積", "商"]}, {"id": "g1-t012", "name": "和", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "加法の結果。", "status": "ok", "formula": "", "keywords": ["たし算", "加法", "結果"], "related": ["g1-t008", "g1-t009", "g1-t013"], "relatedNames": ["加法", "減法", "差"]}, {"id": "g1-t013", "name": "差", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "減法の結果。", "status": "ok", "formula": "", "keywords": ["ひき算", "減法", "結果"], "related": ["g1-t008", "g1-t009", "g1-t012"], "relatedNames": ["加法", "減法", "和"]}, {"id": "g1-t014", "name": "積", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "乗法の結果。", "status": "ok", "formula": "", "keywords": ["かけ算", "乗法", "結果"], "related": ["g1-t010", "g1-t011", "g1-t015"], "relatedNames": ["乗法", "除法", "商"]}, {"id": "g1-t015", "name": "商", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "除法の結果。", "status": "ok", "formula": "", "keywords": ["わり算", "除法", "結果"], "related": ["g1-t010", "g1-t011", "g1-t014"], "relatedNames": ["乗法", "除法", "積"]}, {"id": "g1-t016", "name": "累乗", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "同じ数をいくつかかけ合わせること。", "status": "ok", "formula": "\\[a^n\\]", "keywords": ["指数", "べき", "同じ数をかける"], "related": ["g1-t017"], "relatedNames": ["指数"]}, {"id": "g1-t017", "name": "指数", "grade": 1, "unitId": "g1-seifu", "unit": "正の数・負の数", "category": "数と式", "summary": "累乗で、同じ数を何個かけるかを表す右上の小さい数。", "status": "ok", "formula": "\\[a^n\\]", "keywords": ["累乗", "右上", "何個かける"], "related": ["g1-t016"], "relatedNames": ["累乗"]}, {"id": "g1-t018", "name": "文字式", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "数量を文字を使って表した式。", "status": "ok", "formula": "", "keywords": ["文字", "式", "x", "a", "数量"], "related": ["g1-t019", "g1-t020", "g1-t021", "g1-t022", "g1-t026"], "relatedNames": ["項", "係数", "一次式", "同類項", "積の表し方"]}, {"id": "g1-t019", "name": "項", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "式を加法の形で見たときの、それぞれの部分。", "status": "ok", "formula": "", "keywords": ["式", "加法", "プラスで区切る"], "related": ["g1-t018", "g1-t020", "g1-t021", "g1-t022"], "relatedNames": ["文字式", "係数", "一次式", "同類項"]}, {"id": "g1-t020", "name": "係数", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字を含む項で、その文字にかけられている数。", "status": "ok", "formula": "", "keywords": ["文字の前の数", "かけられている数", "項"], "related": ["g1-t018", "g1-t019", "g1-t021", "g1-t022"], "relatedNames": ["文字式", "項", "一次式", "同類項"]}, {"id": "g1-t021", "name": "一次式", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字について1次の項を含む式。", "status": "ok", "formula": "", "keywords": ["一次", "文字式", "項"], "related": ["g1-t018", "g1-t019", "g1-t020", "g1-t022"], "relatedNames": ["文字式", "項", "係数", "同類項"]}, {"id": "g1-t022", "name": "同類項", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字の部分が同じ項。", "status": "ok", "formula": "", "keywords": ["文字の部分が同じ", "まとめる", "項"], "related": ["g1-t018", "g1-t019", "g1-t020", "g1-t021"], "relatedNames": ["文字式", "項", "係数", "一次式"]}, {"id": "g1-t023", "name": "代入", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字の代わりに数を入れること。", "status": "ok", "formula": "", "keywords": ["文字に数を入れる", "置き換える", "式の値"], "related": ["g1-t024"], "relatedNames": ["式の値"]}, {"id": "g1-t024", "name": "式の値", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字に数を代入して計算した結果。", "status": "ok", "formula": "", "keywords": ["代入", "計算結果", "文字"], "related": ["g1-t023"], "relatedNames": ["代入"]}, {"id": "g1-t025", "name": "数量を文字で表す", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "数量の関係を、文字を使った式で表すこと。", "status": "ok", "formula": "", "keywords": ["数量", "文字式", "関係", "x"], "related": [], "relatedNames": []}, {"id": "g1-t026", "name": "積の表し方", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字式で、かけ算の記号を省くなどして積を表す方法。", "status": "ok", "formula": "", "keywords": ["かけ算記号を省く", "文字式", "積"], "related": ["g1-t027", "g1-t018"], "relatedNames": ["商の表し方", "文字式"]}, {"id": "g1-t027", "name": "商の表し方", "grade": 1, "unitId": "g1-moji", "unit": "文字の式", "category": "数と式", "summary": "文字式で、わり算を分数の形で表す方法。", "status": "ok", "formula": "\\[a\\div b=\\frac{a}{b}\\]", "keywords": ["わり算", "分数", "文字式"], "related": ["g1-t026", "g1-t018"], "relatedNames": ["積の表し方", "文字式"]}, {"id": "g1-t028", "name": "方程式", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "文字の値によって、成り立ったり成り立たなかったりする等式。", "status": "ok", "formula": "\\[ax+b=c\\]", "keywords": ["等式", "x", "解", "文字"], "related": ["g1-t029", "g1-t030", "g1-t031", "g1-t032", "g1-t033"], "relatedNames": ["等式", "左辺", "右辺", "解", "方程式を解く"]}, {"id": "g1-t029", "name": "等式", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "等号「＝」を使って、2つの数量が等しいことを表した式。", "status": "ok", "formula": "", "keywords": ["＝", "イコール", "左辺", "右辺"], "related": ["g1-t028", "g1-t030", "g1-t031", "g1-t032", "g1-t033"], "relatedNames": ["方程式", "左辺", "右辺", "解", "方程式を解く"]}, {"id": "g1-t030", "name": "左辺", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "等式の「＝」より左側の式。", "status": "ok", "formula": "", "keywords": ["＝の左", "等式", "右辺"], "related": ["g1-t028", "g1-t029", "g1-t031", "g1-t032", "g1-t033"], "relatedNames": ["方程式", "等式", "右辺", "解", "方程式を解く"]}, {"id": "g1-t031", "name": "右辺", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "等式の「＝」より右側の式。", "status": "ok", "formula": "", "keywords": ["＝の右", "等式", "左辺"], "related": ["g1-t028", "g1-t029", "g1-t030", "g1-t032", "g1-t033"], "relatedNames": ["方程式", "等式", "左辺", "解", "方程式を解く"]}, {"id": "g1-t032", "name": "解", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "方程式を成り立たせる文字の値。", "status": "ok", "formula": "", "keywords": ["方程式", "成り立つ値", "x"], "related": ["g1-t028", "g1-t029", "g1-t030", "g1-t031", "g1-t033"], "relatedNames": ["方程式", "等式", "左辺", "右辺", "方程式を解く"]}, {"id": "g1-t033", "name": "方程式を解く", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "方程式の解を求めること。", "status": "ok", "formula": "", "keywords": ["解を求める", "方程式", "x"], "related": ["g1-t028", "g1-t029", "g1-t030", "g1-t031", "g1-t032"], "relatedNames": ["方程式", "等式", "左辺", "右辺", "解"]}, {"id": "g1-t034", "name": "移項", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "一方の辺の項を、符号を変えて他方の辺へ移すこと。", "status": "ok", "formula": "", "keywords": ["符号を変える", "反対側の辺", "方程式"], "related": ["g1-t028", "g1-t029", "g1-t030", "g1-t031", "g1-t032"], "relatedNames": ["方程式", "等式", "左辺", "右辺", "解"]}, {"id": "g1-t035", "name": "等式の性質", "grade": 1, "unitId": "g1-hoteishiki", "unit": "方程式", "category": "数と式", "summary": "等式の両辺に同じ数をたす・ひく・かける・わると、等式が保たれる性質。", "status": "ok", "formula": "", "keywords": ["両辺", "同じ数", "たす", "ひく", "かける", "わる"], "related": ["g1-t028", "g1-t029", "g1-t030", "g1-t031", "g1-t032"], "relatedNames": ["方程式", "等式", "左辺", "右辺", "解"]}, {"id": "g1-t036", "name": "関数", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "xの値を決めると、それに対応するyの値がただ1つに決まる関係。", "status": "ok", "formula": "", "keywords": ["x", "y", "対応", "ただ1つ"], "related": ["g1-t037", "g1-t038", "g1-t039"], "relatedNames": ["変数", "対応", "変域"], "slideUrl": "slides/g1/functions/function.html"}, {"id": "g1-t037", "name": "変数", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "いろいろな値をとる文字。", "status": "ok", "formula": "", "keywords": ["x", "y", "いろいろな値", "文字"], "related": ["g1-t036", "g1-t038", "g1-t039"], "relatedNames": ["関数", "対応", "変域"]}, {"id": "g1-t038", "name": "対応", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "あるxの値に対して、どのyの値が組になるかというつながり。", "status": "ok", "formula": "", "keywords": ["x", "y", "組", "関係"], "related": ["g1-t036", "g1-t037", "g1-t039"], "relatedNames": ["関数", "変数", "変域"]}, {"id": "g1-t039", "name": "変域", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "変数がどこからどこまで動くかを表した範囲。", "status": "ok", "formula": "", "keywords": ["範囲", "x", "y", "動く"], "related": ["g1-t036", "g1-t037", "g1-t038"], "relatedNames": ["関数", "変数", "対応"]}, {"id": "g1-t040", "name": "比例", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "xが2倍、3倍…になると、yも2倍、3倍…になる関係。", "status": "ok", "formula": "\\[y=ax\\]", "keywords": ["y=ax", "比例定数", "倍", "増え方", "原点"], "related": ["g1-t041", "g1-t042", "g1-t043", "g1-t050"], "relatedNames": ["比例の式", "比例定数", "比例の表", "比例のグラフ"]}, {"id": "g1-t041", "name": "比例の式", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "比例の関係を y=ax の形で表した式。", "status": "ok", "formula": "\\[y=ax\\]", "keywords": ["y=ax", "比例", "比例定数", "式"], "related": ["g1-t040", "g1-t042", "g1-t043", "g1-t050"], "relatedNames": ["比例", "比例定数", "比例の表", "比例のグラフ"]}, {"id": "g1-t042", "name": "比例定数", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "比例の式 y=ax で、xにかかっている決まった数a。", "status": "ok", "formula": "\\[a=\\frac{y}{x}\\]", "keywords": ["a", "y=ax", "一定", "割合"], "related": ["g1-t040", "g1-t041", "g1-t043", "g1-t050"], "relatedNames": ["比例", "比例の式", "比例の表", "比例のグラフ"]}, {"id": "g1-t043", "name": "比例の表", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "比例のxとyの対応を表にしたもの。", "status": "ok", "formula": "", "keywords": ["表", "x", "y", "対応", "比例"], "related": ["g1-t040", "g1-t041", "g1-t042", "g1-t050"], "relatedNames": ["比例", "比例の式", "比例定数", "比例のグラフ"]}, {"id": "g1-t044", "name": "座標", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "平面上の点の位置を、2つの数の組で表したもの。", "status": "ok", "formula": "\\[(x,y)\\]", "keywords": ["点", "位置", "x座標", "y座標", "座標平面"], "related": ["g1-t045", "g1-t046", "g1-t047", "g1-t048", "g1-t049"], "relatedNames": ["x座標", "y座標", "原点", "x軸", "y軸"]}, {"id": "g1-t045", "name": "x座標", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "座標のうち、横方向の位置を表す数。", "status": "ok", "formula": "", "keywords": ["横", "x軸", "座標", "点"], "related": ["g1-t044", "g1-t046", "g1-t047", "g1-t048", "g1-t049"], "relatedNames": ["座標", "y座標", "原点", "x軸", "y軸"]}, {"id": "g1-t046", "name": "y座標", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "座標のうち、縦方向の位置を表す数。", "status": "ok", "formula": "", "keywords": ["縦", "y軸", "座標", "点"], "related": ["g1-t044", "g1-t045", "g1-t047", "g1-t048", "g1-t049"], "relatedNames": ["座標", "x座標", "原点", "x軸", "y軸"]}, {"id": "g1-t047", "name": "原点", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "x軸とy軸が交わる点。", "status": "ok", "formula": "\\[(0,0)\\]", "keywords": ["0,0", "x軸", "y軸", "交点"], "related": ["g1-t044", "g1-t045", "g1-t046", "g1-t048", "g1-t049"], "relatedNames": ["座標", "x座標", "y座標", "x軸", "y軸"]}, {"id": "g1-t048", "name": "x軸", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "座標平面で横方向に引かれた数直線。", "status": "ok", "formula": "", "keywords": ["横軸", "座標平面", "数直線"], "related": ["g1-t044", "g1-t045", "g1-t046", "g1-t047", "g1-t049"], "relatedNames": ["座標", "x座標", "y座標", "原点", "y軸"]}, {"id": "g1-t049", "name": "y軸", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "座標平面で縦方向に引かれた数直線。", "status": "ok", "formula": "", "keywords": ["縦軸", "座標平面", "数直線"], "related": ["g1-t044", "g1-t045", "g1-t046", "g1-t047", "g1-t048"], "relatedNames": ["座標", "x座標", "y座標", "原点", "x軸"]}, {"id": "g1-t050", "name": "比例のグラフ", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "比例 y=ax の関係を表した、原点を通る直線のグラフ。", "status": "ok", "formula": "\\[y=ax\\]", "keywords": ["原点", "直線", "y=ax", "グラフ"], "related": ["g1-t040", "g1-t041", "g1-t042", "g1-t043"], "relatedNames": ["比例", "比例の式", "比例定数", "比例の表"]}, {"id": "g1-t051", "name": "反比例", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "xが2倍、3倍…になると、yは1/2倍、1/3倍…になる関係。", "status": "ok", "formula": "\\[y=\\frac{a}{x}\\]", "keywords": ["y=a/x", "積", "一定", "曲線"], "related": ["g1-t052", "g1-t053", "g1-t054", "g1-t055"], "relatedNames": ["反比例の式", "反比例の比例定数", "反比例の表", "反比例のグラフ"]}, {"id": "g1-t052", "name": "反比例の式", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "反比例の関係を y=a/x の形で表した式。", "status": "ok", "formula": "\\[y=\\frac{a}{x}\\]", "keywords": ["y=a/x", "反比例", "比例定数", "式"], "related": ["g1-t051", "g1-t053", "g1-t054", "g1-t055"], "relatedNames": ["反比例", "反比例の比例定数", "反比例の表", "反比例のグラフ"]}, {"id": "g1-t053", "name": "反比例の比例定数", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "反比例の式 y=a/x で使われる決まった数a。", "status": "ok", "formula": "\\[a=xy\\]", "keywords": ["a", "xy", "積", "一定"], "related": ["g1-t051", "g1-t052", "g1-t054", "g1-t055"], "relatedNames": ["反比例", "反比例の式", "反比例の表", "反比例のグラフ"]}, {"id": "g1-t054", "name": "反比例の表", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "反比例のxとyの対応を表にしたもの。", "status": "ok", "formula": "", "keywords": ["表", "x", "y", "対応", "反比例"], "related": ["g1-t051", "g1-t052", "g1-t053", "g1-t055"], "relatedNames": ["反比例", "反比例の式", "反比例の比例定数", "反比例のグラフ"]}, {"id": "g1-t055", "name": "反比例のグラフ", "grade": 1, "unitId": "g1-henkatotaiou", "unit": "比例・反比例", "category": "関数", "summary": "反比例 y=a/x の関係を表した、2つに分かれた曲線のグラフ。双曲線とも言う。", "status": "revise", "formula": "\\[y=\\frac{a}{x}\\]", "keywords": ["曲線", "双曲線", "y=a/x", "グラフ"], "related": ["g1-t051", "g1-t052", "g1-t053", "g1-t054"], "relatedNames": ["反比例", "反比例の式", "反比例の比例定数", "反比例の表"]}, {"id": "g1-t056", "name": "直線", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "両方にどこまでもまっすぐ伸びる線。", "status": "ok", "formula": "", "keywords": ["まっすぐ", "両側に伸びる", "線"], "related": ["g1-t057", "g1-t058"], "relatedNames": ["線分", "半直線"]}, {"id": "g1-t057", "name": "線分", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "直線の2点にはさまれた部分。", "status": "ok", "formula": "", "keywords": ["2点", "直線の一部", "端"], "related": ["g1-t056", "g1-t058"], "relatedNames": ["直線", "半直線"]}, {"id": "g1-t058", "name": "半直線", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "1点を端として、一方にどこまでも伸びる線。", "status": "ok", "formula": "", "keywords": ["1点", "一方向", "直線"], "related": ["g1-t056", "g1-t057"], "relatedNames": ["直線", "線分"]}, {"id": "g1-t059", "name": "角", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "1点から出る2本の半直線でできる図形。", "status": "ok", "formula": "", "keywords": ["半直線", "頂点", "2本"], "related": ["g1-t060", "g1-t061"], "relatedNames": ["頂点", "辺"]}, {"id": "g1-t060", "name": "頂点", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "角や多角形などで、辺と辺が出会う点。", "status": "ok", "formula": "", "keywords": ["点", "辺", "角"], "related": ["g1-t059", "g1-t061"], "relatedNames": ["角", "辺"]}, {"id": "g1-t061", "name": "辺", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "図形をつくる線分。", "status": "ok", "formula": "", "keywords": ["線分", "図形", "頂点"], "related": ["g1-t059", "g1-t060"], "relatedNames": ["角", "頂点"]}, {"id": "g1-t062", "name": "垂直", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "2つの直線が直角に交わる関係。", "status": "ok", "formula": "", "keywords": ["直角", "交わる", "90度"], "related": ["g1-t063", "g1-t066"], "relatedNames": ["垂線", "距離"]}, {"id": "g1-t063", "name": "垂線", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "ある直線に垂直な直線。", "status": "ok", "formula": "", "keywords": ["垂直", "直角", "直線"], "related": ["g1-t062", "g1-t066"], "relatedNames": ["垂直", "距離"]}, {"id": "g1-t064", "name": "平行", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "2直線が同じ平面上にあり、どこまで延ばしても交わらない関係。", "status": "ok", "formula": "", "keywords": ["交わらない", "同じ平面", "直線"], "related": ["g1-t065"], "relatedNames": ["平行線"]}, {"id": "g1-t065", "name": "平行線", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "互いに平行な2本の直線。", "status": "ok", "formula": "", "keywords": ["平行", "2本の直線", "交わらない"], "related": ["g1-t064"], "relatedNames": ["平行"]}, {"id": "g1-t066", "name": "距離", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "2点間や、点と直線などの間の最短の長さ。", "status": "ok", "formula": "", "keywords": ["最短", "長さ", "点", "直線"], "related": ["g1-t062", "g1-t063"], "relatedNames": ["垂直", "垂線"]}, {"id": "g1-t067", "name": "移動", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "図形の形や大きさを変えずに位置を変えること。", "status": "ok", "formula": "", "keywords": ["形と大きさを変えない", "位置", "図形"], "related": ["g1-t068", "g1-t069", "g1-t070", "g1-t071"], "relatedNames": ["平行移動", "回転移動", "対称移動", "対称の軸"]}, {"id": "g1-t068", "name": "平行移動", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "図形を一定の方向に一定の長さだけ動かす移動。", "status": "ok", "formula": "", "keywords": ["一定の方向", "一定の長さ", "移動"], "related": ["g1-t067", "g1-t069", "g1-t070", "g1-t071"], "relatedNames": ["移動", "回転移動", "対称移動", "対称の軸"]}, {"id": "g1-t069", "name": "回転移動", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "ある点を中心として図形を回す移動。", "status": "ok", "formula": "", "keywords": ["中心", "回す", "移動"], "related": ["g1-t067", "g1-t068", "g1-t070", "g1-t071"], "relatedNames": ["移動", "平行移動", "対称移動", "対称の軸"]}, {"id": "g1-t070", "name": "対称移動", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "ある直線を折り目のようにして図形を裏返す移動。", "status": "ok", "formula": "", "keywords": ["折り目", "裏返す", "移動"], "related": ["g1-t067", "g1-t068", "g1-t069", "g1-t071"], "relatedNames": ["移動", "平行移動", "回転移動", "対称の軸"]}, {"id": "g1-t071", "name": "対称の軸", "grade": 1, "unitId": "g1-heimen", "unit": "平面図形", "category": "図形", "summary": "対称移動で基準になる直線。", "status": "ok", "formula": "", "keywords": ["対称移動", "基準", "直線"], "related": ["g1-t067", "g1-t068", "g1-t069", "g1-t070"], "relatedNames": ["移動", "平行移動", "回転移動", "対称移動"]}, {"id": "g1-t072", "name": "立体", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "空間に広がりをもつ図形。", "status": "ok", "formula": "", "keywords": ["空間", "図形", "面", "辺", "頂点"], "related": ["g1-t073", "g1-t074", "g1-t075"], "relatedNames": ["面", "辺", "頂点"]}, {"id": "g1-t073", "name": "面", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体を囲む平らな部分や曲がった部分。", "status": "ok", "formula": "", "keywords": ["立体", "平ら", "曲面"], "related": ["g1-t072", "g1-t074", "g1-t075"], "relatedNames": ["立体", "辺", "頂点"]}, {"id": "g1-t074", "name": "辺", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体で、面と面が交わってできる線分。", "status": "ok", "formula": "", "keywords": ["線分", "図形", "頂点"], "related": ["g1-t075", "g1-t072", "g1-t073"], "relatedNames": ["頂点", "立体", "面"]}, {"id": "g1-t075", "name": "頂点", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体で、辺と辺が集まる点。", "status": "ok", "formula": "", "keywords": ["点", "辺", "角"], "related": ["g1-t074", "g1-t072", "g1-t073"], "relatedNames": ["辺", "立体", "面"]}, {"id": "g1-t076", "name": "角柱", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "2つの合同で平行な多角形を底面にもつ立体。", "status": "ok", "formula": "", "keywords": ["底面", "合同", "平行", "多角形"], "related": ["g1-t077", "g1-t078", "g1-t079"], "relatedNames": ["円柱", "角錐", "円錐"]}, {"id": "g1-t077", "name": "円柱", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "2つの合同で平行な円を底面にもつ立体。", "status": "ok", "formula": "", "keywords": ["底面", "円", "合同", "平行"], "related": ["g1-t076", "g1-t078", "g1-t079"], "relatedNames": ["角柱", "角錐", "円錐"]}, {"id": "g1-t078", "name": "角錐", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "1つの多角形を底面とし、側面が三角形でできた立体。", "status": "ok", "formula": "", "keywords": ["底面", "多角形", "側面", "三角形"], "related": ["g1-t076", "g1-t077", "g1-t079"], "relatedNames": ["角柱", "円柱", "円錐"]}, {"id": "g1-t079", "name": "円錐", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "円を底面とし、側面が1つの頂点に集まる立体。", "status": "ok", "formula": "", "keywords": ["底面", "円", "頂点", "側面"], "related": ["g1-t076", "g1-t077", "g1-t078", "g1-t084"], "relatedNames": ["角柱", "円柱", "角錐", "母線"]}, {"id": "g1-t080", "name": "正多面体", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "すべての面が合同な正多角形で、各頂点に集まる面の数も同じ多面体。", "status": "ok", "formula": "", "keywords": ["正多角形", "合同", "多面体"], "related": [], "relatedNames": []}, {"id": "g1-t081", "name": "見取図", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体の形が分かるように平面上に表した図。", "status": "ok", "formula": "", "keywords": ["立体", "平面", "形"], "related": ["g1-t082", "g1-t083"], "relatedNames": ["展開図", "投影図"]}, {"id": "g1-t082", "name": "展開図", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体の表面を切り開いて平面上に広げた図。", "status": "ok", "formula": "", "keywords": ["立体", "切り開く", "平面"], "related": ["g1-t081", "g1-t083"], "relatedNames": ["見取図", "投影図"]}, {"id": "g1-t083", "name": "投影図", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体を正面や真上などから見た図。", "status": "ok", "formula": "", "keywords": ["正面", "真上", "立体"], "related": ["g1-t081", "g1-t082"], "relatedNames": ["見取図", "展開図"]}, {"id": "g1-t084", "name": "母線", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "円錐などの側面上で、頂点と底面の円周上の点を結ぶ線分。", "status": "ok", "formula": "", "keywords": ["円錐", "頂点", "底面", "線分"], "related": ["g1-t079"], "relatedNames": ["円錐"]}, {"id": "g1-t085", "name": "体積", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体が占める空間の大きさ。", "status": "ok", "formula": "", "keywords": ["立体", "空間の大きさ", "かさ"], "related": ["g1-t086"], "relatedNames": ["表面積"]}, {"id": "g1-t086", "name": "表面積", "grade": 1, "unitId": "g1-kukan", "unit": "空間図形", "category": "図形", "summary": "立体のすべての面の面積の合計。", "status": "ok", "formula": "", "keywords": ["立体", "面積", "すべての面"], "related": ["g1-t085"], "relatedNames": ["体積"]}, {"id": "g1-t087", "name": "データ", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "調べたり比べたりするために集めた数値や情報。", "status": "ok", "formula": "", "keywords": ["数値", "情報", "資料", "調べる"], "related": ["g1-t088", "g1-t089", "g1-t090", "g1-t091", "g1-t100"], "relatedNames": ["度数", "度数分布表", "階級", "階級値", "範囲"]}, {"id": "g1-t088", "name": "度数", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "ある階級や値に入るデータの個数。", "status": "ok", "formula": "", "keywords": ["個数", "階級", "データ"], "related": ["g1-t087", "g1-t089", "g1-t090", "g1-t091"], "relatedNames": ["データ", "度数分布表", "階級", "階級値"]}, {"id": "g1-t089", "name": "度数分布表", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "データを階級に分け、それぞれの度数をまとめた表。", "status": "ok", "formula": "", "keywords": ["階級", "度数", "表"], "related": ["g1-t087", "g1-t088", "g1-t090", "g1-t091"], "relatedNames": ["データ", "度数", "階級", "階級値"]}, {"id": "g1-t090", "name": "階級", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "データを整理するときに分ける区間。", "status": "ok", "formula": "", "keywords": ["区間", "データ", "度数"], "related": ["g1-t087", "g1-t088", "g1-t089", "g1-t091"], "relatedNames": ["データ", "度数", "度数分布表", "階級値"]}, {"id": "g1-t091", "name": "階級値", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "階級の中央の値。", "status": "ok", "formula": "", "keywords": ["中央", "階級", "代表"], "related": ["g1-t087", "g1-t088", "g1-t089", "g1-t090"], "relatedNames": ["データ", "度数", "度数分布表", "階級"]}, {"id": "g1-t092", "name": "度数分布多角形", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "階級値と度数を表す点を順に線分で結んだグラフ。", "status": "ok", "formula": "", "keywords": ["階級値", "度数", "点", "線分", "グラフ"], "related": ["g1-t093"], "relatedNames": ["ヒストグラム"]}, {"id": "g1-t093", "name": "ヒストグラム", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "階級ごとの度数を長方形で表したグラフ。", "status": "ok", "formula": "", "keywords": ["長方形", "階級", "度数", "グラフ"], "related": ["g1-t092"], "relatedNames": ["度数分布多角形"]}, {"id": "g1-t094", "name": "相対度数", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "全体の度数に対する、ある階級の度数の割合。", "status": "ok", "formula": "\\[\\frac{\\text{ある階級の度数}}{\\text{全体の度数}}\\]", "keywords": ["割合", "度数", "全体", "比較"], "related": ["g1-t095", "g1-t096"], "relatedNames": ["累積度数", "累積相対度数"]}, {"id": "g1-t095", "name": "累積度数", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "小さい階級から度数を順に足し合わせた値。", "status": "ok", "formula": "", "keywords": ["足し合わせる", "度数", "順"], "related": ["g1-t094", "g1-t096"], "relatedNames": ["相対度数", "累積相対度数"]}, {"id": "g1-t096", "name": "累積相対度数", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "小さい階級から相対度数を順に足し合わせた値。", "status": "ok", "formula": "", "keywords": ["足し合わせる", "相対度数", "順"], "related": ["g1-t094", "g1-t095"], "relatedNames": ["相対度数", "累積度数"]}, {"id": "g1-t097", "name": "平均値", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "すべての値の合計を、データの個数で割った値。", "status": "ok", "formula": "\\[\\frac{\\text{値の合計}}{\\text{データの個数}}\\]", "keywords": ["合計", "個数", "代表値", "平均"], "related": ["g1-t098", "g1-t099"], "relatedNames": ["中央値", "最頻値"]}, {"id": "g1-t098", "name": "中央値", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "データを大きさの順に並べたとき、中央にくる値。", "status": "ok", "formula": "", "keywords": ["中央", "並べる", "代表値", "メジアン"], "related": ["g1-t097", "g1-t099"], "relatedNames": ["平均値", "最頻値"]}, {"id": "g1-t099", "name": "最頻値", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "データの中で最も多く現れる値。", "status": "ok", "formula": "", "keywords": ["最も多い", "代表値", "モード"], "related": ["g1-t097", "g1-t098"], "relatedNames": ["平均値", "中央値"]}, {"id": "g1-t100", "name": "範囲", "grade": 1, "unitId": "g1-data", "unit": "データの活用", "category": "データの活用", "summary": "データの最大値と最小値の差。", "status": "ok", "formula": "\\[\\text{最大値}-\\text{最小値}\\]", "keywords": ["最大値", "最小値", "差", "散らばり"], "related": ["g1-t087"], "relatedNames": ["データ"]}];
+const byId=Object.fromEntries(TERMS.map(t=>[t.id,t]));
+const grid=document.getElementById('grid');
+const q=document.getElementById('q');
+const unitSelect=document.getElementById('unitSelect');
+const count=document.getElementById('count');
+let status='all';
+
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function normalized(t){return (t.name+' '+t.summary+' '+t.unit+' '+t.category+' '+t.keywords.join(' ')).toLowerCase()}
+
+function render(){
+  const query=q.value.trim().toLowerCase();
+  const unit=unitSelect.value;
+  const list=TERMS.filter(t=>{
+    if(unit!=='all'&&t.unitId!==unit)return false;
+    if(status!=='all'&&t.status!==status)return false;
+    if(query&&!normalized(t).includes(query))return false;
+    return true;
+  });
+  count.textContent=`${list.length} / ${TERMS.length}語`;
+  if(!list.length){
+    grid.innerHTML='<div class="empty">条件に合う用語が見つかりませんでした。</div>';
+    return;
+  }
+  grid.innerHTML=list.map(t=>`
+    <button class="term-card" data-id="${t.id}">
+      <div class="card-meta">
+        <span class="pill">${esc(t.unit)}</span>
+        ${t.status==='revise'?'<span class="pill warn">要修正</span>':'<span class="pill">確認済み</span>'}
+      </div>
+      <h3>${esc(t.name)}</h3>
+      <p>${esc(t.summary)}</p>
+      <div class="card-bottom">解説スライドを見る →</div>
+    </button>`).join('');
+}
+
+function openDetail(id){
+  const t=byId[id]; if(!t)return;
+  document.getElementById('detailTitle').textContent=t.name;
+  document.getElementById('detailSummary').textContent=t.summary;
+  document.getElementById('detailMeta').innerHTML=`<span class="pill">${esc(t.unit)}</span><span class="pill">${esc(t.category)}</span>${t.status==='revise'?'<span class="pill warn">要修正</span>':'<span class="pill">確認済み</span>'}`;
+  const f=document.getElementById('detailFormula');
+  f.innerHTML=t.formula||'';
+  f.style.display=t.formula?'block':'none';
+  document.getElementById('keywords').innerHTML=t.keywords.length?t.keywords.map(x=>`<span class="chip keyword">${esc(x)}</span>`).join(''):'<span class="chip keyword">登録なし</span>';
+  document.getElementById('related').innerHTML=t.related.length?t.related.map(r=>{
+    const rt=byId[r]; return rt?`<button class="chip related-chip" data-id="${rt.id}">${esc(rt.name)}</button>`:'';
+  }).join(''):'<span class="chip keyword">登録なし</span>';
+  const slideBlock=document.getElementById('slideLinkBlock');
+  if(t.slideUrl){
+    slideBlock.hidden=false;
+    slideBlock.innerHTML=`<a class="slide-link" href="${t.slideUrl}" target="_blank" rel="noopener">▶ 解説スライドを見る</a>`;
+  }else{
+    slideBlock.hidden=true;
+    slideBlock.innerHTML='';
+  }
+  document.getElementById('notice').hidden=t.status!=='revise';
+  overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  if(window.MathJax?.typesetPromise&&t.formula) MathJax.typesetPromise([f]).catch(()=>{});
+}
+
+function closeDetail(){
+  overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';
+}
+
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openDetail(b.dataset.id)});
+document.getElementById('related').addEventListener('click',e=>{const b=e.target.closest('.related-chip');if(b)openDetail(b.dataset.id)});
+q.addEventListener('input',render);unitSelect.addEventListener('change',render);
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+  status=b.dataset.status;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));render();
+}));
+document.getElementById('closeBtn').addEventListener('click',closeDetail);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeDetail()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+render();
+</script>
+</body>
+</html>
