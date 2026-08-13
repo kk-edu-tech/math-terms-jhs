@@ -102,11 +102,27 @@ button{font:inherit}
   .deck.print-4 .slide{height:50vh;width:50%;float:left;page-break-after:auto}
   .deck.print-4 .slide:nth-of-type(2n+1){clear:left}
 }
+
+.ios-tip{position:fixed;inset:0;background:rgba(15,23,42,.28);z-index:90;display:none;align-items:center;justify-content:center;padding:18px}
+.ios-tip.open{display:flex}
+.ios-tip-card{background:#fff;border:1px solid #bfdbfe;border-radius:12px;box-shadow:0 24px 70px rgba(15,23,42,.24);padding:20px;width:min(92vw,520px);color:#0f172a}
+.ios-tip-card h2{margin:0 0 10px;font-size:26px;line-height:1.3}
+.ios-tip-card p{margin:0 0 12px;font-size:18px;line-height:1.7;font-weight:760;color:#334155}
+.ios-tip-card .steps{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:18px;line-height:1.7;font-weight:850;color:#1e3a8a}
+.ios-tip-card button{border:1px solid #bfdbfe;background:#eff6ff;color:#1e3a8a;border-radius:8px;font-weight:900;min-height:38px;min-width:90px;cursor:pointer}
+
 </style>
 <script>
 window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.04,matchFontHeight:false},startup:{pageReady:()=>MathJax.startup.defaultPageReady().then(()=>{document.documentElement.classList.add('mathjax-ready');document.querySelector('.math-status')?.remove();})}}
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="document.documentElement.classList.add('mathjax-failed')"></script>
+
+<link rel="manifest" href="../../../manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="数学用語">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 </head>
 <body>
 <div class="math-status" style="position:fixed;left:10px;bottom:58px;z-index:40;background:#fff;border:1px solid #bfdbfe;border-radius:8px;padding:5px 9px;color:#64748b;font-size:12px">数式を読み込んでいます…</div>
@@ -226,6 +242,17 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
 <div class="modal" id="printModal"><div class="dialog"><div class="heading" style="font-size:30px">印刷・PDF保存</div><div class="print-options"><label><input type="radio" name="printTarget" value="current" checked> 現在のスライドだけ</label><label><input type="radio" name="printTarget" value="all"> すべてのスライド</label><label><input type="radio" name="printLayout" value="1" checked> 1ページに1スライド</label><label><input type="radio" name="printLayout" value="2"> 1ページに2スライド</label><label><input type="radio" name="printLayout" value="4"> 1ページに4スライド</label></div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doPrint">印刷する</button></div></div></div>
 <div class="modal" id="confirmModal"><div class="dialog"><div class="body">最初のスライドに戻りますか？</div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doReset">戻る</button></div></div></div>
 
+
+<div class="ios-tip" id="iosTip">
+  <div class="ios-tip-card">
+    <h2>iPhoneでは全画面表示の代わりに</h2>
+    <p>Safariの仕様により、このボタンで全画面にならない場合があります。</p>
+    <div class="steps">共有ボタン →「ホーム画面に追加」→ ホーム画面から開く</div>
+    <p>この方法だと、アプリのように大きく表示できます。</p>
+    <div class="dialog-actions"><button id="closeIosTip">閉じる</button></div>
+  </div>
+</div>
+
 <script>
 (()=>{
  const deck=document.getElementById('deck');const slides=[...document.querySelectorAll('.slide')];
@@ -244,7 +271,21 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  function closeMenu(){menu.classList.remove('open')}
  function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));closeMenu()}
  function openList(){const grid=document.getElementById('pageGrid');grid.innerHTML='';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='pagebtn'+(i===index?' current':'');b.textContent=i+1;b.onclick=()=>go(i);grid.appendChild(b)});document.getElementById('listModal').classList.add('open')}
- function toggleFullscreen(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.()}
+ function isIOSLike(){
+   return /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+ }
+ function showIosTip(){
+   const tip=document.getElementById('iosTip');
+   if(tip) tip.classList.add('open');
+ }
+ function toggleFullscreen(){
+   const canFullscreen=!!(document.fullscreenEnabled && document.documentElement.requestFullscreen);
+   if(isIOSLike() || !canFullscreen){
+     showIosTip();
+     return;
+   }
+   document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+ }
  function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
  menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==menuBtn)closeMenu()});
@@ -259,6 +300,10 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  document.addEventListener('touchend',e=>{if(sx==null||isScrolling)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev()}sx=null;sy=null},{passive:true});
  function tipFromClientX(x){const r=progressTrack.getBoundingClientRect();const p=Math.min(Math.max((x-r.left)/r.width,0),1);const n=Math.min(slides.length-1,Math.floor(p*slides.length));progressTip.textContent=n+1;progressTip.style.left=(r.left+p*r.width)+'px';progressTip.style.opacity=1;return n}
  progressTrack.addEventListener('pointermove',e=>tipFromClientX(e.clientX));progressTrack.addEventListener('pointerleave',()=>progressTip.style.opacity=0);progressTrack.addEventListener('click',e=>go(tipFromClientX(e.clientX)));
+
+ document.getElementById('closeIosTip')?.addEventListener('click',()=>document.getElementById('iosTip')?.classList.remove('open'));
+ document.getElementById('iosTip')?.addEventListener('click',e=>{if(e.target.id==='iosTip')e.currentTarget.classList.remove('open')});
+
  restoreFragments();update(false);
  setTimeout(()=>{if(!document.documentElement.classList.contains('mathjax-ready'))document.documentElement.classList.add('mathjax-failed')},4500);
 })();

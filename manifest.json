@@ -1,0 +1,19 @@
+{
+  "name": "中学生のための数学",
+  "short_name": "数学用語",
+  "description": "中学生向け数学用語検索・解説スライド",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%232563eb'/%3E%3Ctext x='256' y='326' text-anchor='middle' font-size='240' font-family='Arial,sans-serif' font-weight='700' fill='white'%3E%E2%88%91%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
