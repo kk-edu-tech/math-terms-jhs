@@ -270,10 +270,6 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
 
    // 非対応環境では何もしない。ホーム画面追加の案内は出さない。
  }
-
-   document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
- }
- }
  function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
  menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==menuBtn)closeMenu()});
