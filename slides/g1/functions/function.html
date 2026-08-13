@@ -103,14 +103,6 @@ button{font:inherit}
   .deck.print-4 .slide:nth-of-type(2n+1){clear:left}
 }
 
-.ios-tip{position:fixed;inset:0;background:rgba(15,23,42,.28);z-index:90;display:none;align-items:center;justify-content:center;padding:18px}
-.ios-tip.open{display:flex}
-.ios-tip-card{background:#fff;border:1px solid #bfdbfe;border-radius:12px;box-shadow:0 24px 70px rgba(15,23,42,.24);padding:20px;width:min(92vw,520px);color:#0f172a}
-.ios-tip-card h2{margin:0 0 10px;font-size:26px;line-height:1.3}
-.ios-tip-card p{margin:0 0 12px;font-size:18px;line-height:1.7;font-weight:760;color:#334155}
-.ios-tip-card .steps{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:18px;line-height:1.7;font-weight:850;color:#1e3a8a}
-.ios-tip-card button{border:1px solid #bfdbfe;background:#eff6ff;color:#1e3a8a;border-radius:8px;font-weight:900;min-height:38px;min-width:90px;cursor:pointer}
-
 </style>
 <script>
 window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.04,matchFontHeight:false},startup:{pageReady:()=>MathJax.startup.defaultPageReady().then(()=>{document.documentElement.classList.add('mathjax-ready');document.querySelector('.math-status')?.remove();})}}
@@ -243,16 +235,6 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
 <div class="modal" id="confirmModal"><div class="dialog"><div class="body">最初のスライドに戻りますか？</div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doReset">戻る</button></div></div></div>
 
 
-<div class="ios-tip" id="iosTip">
-  <div class="ios-tip-card">
-    <h2>iPhoneでは全画面表示の代わりに</h2>
-    <p>Safariの仕様により、このボタンで全画面にならない場合があります。</p>
-    <div class="steps">共有ボタン →「ホーム画面に追加」→ ホーム画面から開く</div>
-    <p>この方法だと、アプリのように大きく表示できます。</p>
-    <div class="dialog-actions"><button id="closeIosTip">閉じる</button></div>
-  </div>
-</div>
-
 <script>
 (()=>{
  const deck=document.getElementById('deck');const slides=[...document.querySelectorAll('.slide')];
@@ -271,35 +253,26 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  function closeMenu(){menu.classList.remove('open')}
  function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));closeMenu()}
  function openList(){const grid=document.getElementById('pageGrid');grid.innerHTML='';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='pagebtn'+(i===index?' current':'');b.textContent=i+1;b.onclick=()=>go(i);grid.appendChild(b)});document.getElementById('listModal').classList.add('open')}
- function isIOSLike(){
-   return /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
- }
  function isStandalone(){
    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
  }
- function showIosTip(){
-   const tip=document.getElementById('iosTip');
-   if(tip) tip.classList.add('open');
- }
  function toggleFullscreen(){
-   // ホーム画面から起動している場合は、すでに全画面相当なので何もしない。
-   if(isStandalone()) return;
+   const target=document.documentElement;
+   const request=target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen;
+   const exit=document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+   const fullscreenElement=document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 
-   const canFullscreen=!!(document.fullscreenEnabled && document.documentElement.requestFullscreen);
-
-   // iPhone Safariなど、Fullscreen APIが使いにくい環境では案内を表示。
-   if(isIOSLike() || !canFullscreen){
-     showIosTip();
+   // iPhoneでも、対応している環境では実際の全画面表示を試す。
+   if(request){
+     fullscreenElement ? exit?.call(document) : request.call(target);
      return;
    }
 
+   // 非対応環境では何もしない。ホーム画面追加の案内は出さない。
+ }
+
    document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
  }
- function setupFullscreenMenu(){
-   const fullscreenBtn=document.querySelector('[data-action="fullscreen"]');
-   if(fullscreenBtn && isStandalone()){
-     fullscreenBtn.style.display='none';
-   }
  }
  function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
  menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
@@ -315,12 +288,7 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  document.addEventListener('touchend',e=>{if(sx==null||isScrolling)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev()}sx=null;sy=null},{passive:true});
  function tipFromClientX(x){const r=progressTrack.getBoundingClientRect();const p=Math.min(Math.max((x-r.left)/r.width,0),1);const n=Math.min(slides.length-1,Math.floor(p*slides.length));progressTip.textContent=n+1;progressTip.style.left=(r.left+p*r.width)+'px';progressTip.style.opacity=1;return n}
  progressTrack.addEventListener('pointermove',e=>tipFromClientX(e.clientX));progressTrack.addEventListener('pointerleave',()=>progressTip.style.opacity=0);progressTrack.addEventListener('click',e=>go(tipFromClientX(e.clientX)));
-
- document.getElementById('closeIosTip')?.addEventListener('click',()=>document.getElementById('iosTip')?.classList.remove('open'));
- document.getElementById('iosTip')?.addEventListener('click',e=>{if(e.target.id==='iosTip')e.currentTarget.classList.remove('open')});
-
- setupFullscreenMenu();
- restoreFragments();update(false);
+restoreFragments();update(false);
  setTimeout(()=>{if(!document.documentElement.classList.contains('mathjax-ready'))document.documentElement.classList.add('mathjax-failed')},4500);
 })();
 </script>
