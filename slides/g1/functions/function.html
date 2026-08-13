@@ -274,17 +274,32 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  function isIOSLike(){
    return /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
  }
+ function isStandalone(){
+   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+ }
  function showIosTip(){
    const tip=document.getElementById('iosTip');
    if(tip) tip.classList.add('open');
  }
  function toggleFullscreen(){
+   // ホーム画面から起動している場合は、すでに全画面相当なので何もしない。
+   if(isStandalone()) return;
+
    const canFullscreen=!!(document.fullscreenEnabled && document.documentElement.requestFullscreen);
+
+   // iPhone Safariなど、Fullscreen APIが使いにくい環境では案内を表示。
    if(isIOSLike() || !canFullscreen){
      showIosTip();
      return;
    }
+
    document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+ }
+ function setupFullscreenMenu(){
+   const fullscreenBtn=document.querySelector('[data-action="fullscreen"]');
+   if(fullscreenBtn && isStandalone()){
+     fullscreenBtn.style.display='none';
+   }
  }
  function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
  menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
@@ -304,6 +319,7 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  document.getElementById('closeIosTip')?.addEventListener('click',()=>document.getElementById('iosTip')?.classList.remove('open'));
  document.getElementById('iosTip')?.addEventListener('click',e=>{if(e.target.id==='iosTip')e.currentTarget.classList.remove('open')});
 
+ setupFullscreenMenu();
  restoreFragments();update(false);
  setTimeout(()=>{if(!document.documentElement.classList.contains('mathjax-ready'))document.documentElement.classList.add('mathjax-failed')},4500);
 })();
