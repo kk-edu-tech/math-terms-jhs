@@ -102,19 +102,11 @@ button{font:inherit}
   .deck.print-4 .slide{height:50vh;width:50%;float:left;page-break-after:auto}
   .deck.print-4 .slide:nth-of-type(2n+1){clear:left}
 }
-
 </style>
 <script>
 window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.04,matchFontHeight:false},startup:{pageReady:()=>MathJax.startup.defaultPageReady().then(()=>{document.documentElement.classList.add('mathjax-ready');document.querySelector('.math-status')?.remove();})}}
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="document.documentElement.classList.add('mathjax-failed')"></script>
-
-<link rel="manifest" href="../../../manifest.json">
-<meta name="theme-color" content="#2563eb">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="数学用語">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-
 </head>
 <body>
 <div class="math-status" style="position:fixed;left:10px;bottom:58px;z-index:40;background:#fff;border:1px solid #bfdbfe;border-radius:8px;padding:5px 9px;color:#64748b;font-size:12px">数式を読み込んでいます…</div>
@@ -234,7 +226,6 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
 <div class="modal" id="printModal"><div class="dialog"><div class="heading" style="font-size:30px">印刷・PDF保存</div><div class="print-options"><label><input type="radio" name="printTarget" value="current" checked> 現在のスライドだけ</label><label><input type="radio" name="printTarget" value="all"> すべてのスライド</label><label><input type="radio" name="printLayout" value="1" checked> 1ページに1スライド</label><label><input type="radio" name="printLayout" value="2"> 1ページに2スライド</label><label><input type="radio" name="printLayout" value="4"> 1ページに4スライド</label></div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doPrint">印刷する</button></div></div></div>
 <div class="modal" id="confirmModal"><div class="dialog"><div class="body">最初のスライドに戻りますか？</div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doReset">戻る</button></div></div></div>
 
-
 <script>
 (()=>{
  const deck=document.getElementById('deck');const slides=[...document.querySelectorAll('.slide')];
@@ -253,23 +244,7 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  function closeMenu(){menu.classList.remove('open')}
  function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));closeMenu()}
  function openList(){const grid=document.getElementById('pageGrid');grid.innerHTML='';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='pagebtn'+(i===index?' current':'');b.textContent=i+1;b.onclick=()=>go(i);grid.appendChild(b)});document.getElementById('listModal').classList.add('open')}
- function isStandalone(){
-   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
- }
- function toggleFullscreen(){
-   const target=document.documentElement;
-   const request=target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen;
-   const exit=document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-   const fullscreenElement=document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-
-   // iPhoneでも、対応している環境では実際の全画面表示を試す。
-   if(request){
-     fullscreenElement ? exit?.call(document) : request.call(target);
-     return;
-   }
-
-   // 非対応環境では何もしない。ホーム画面追加の案内は出さない。
- }
+ function toggleFullscreen(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.()}
  function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
  menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==menuBtn)closeMenu()});
@@ -284,7 +259,7 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  document.addEventListener('touchend',e=>{if(sx==null||isScrolling)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev()}sx=null;sy=null},{passive:true});
  function tipFromClientX(x){const r=progressTrack.getBoundingClientRect();const p=Math.min(Math.max((x-r.left)/r.width,0),1);const n=Math.min(slides.length-1,Math.floor(p*slides.length));progressTip.textContent=n+1;progressTip.style.left=(r.left+p*r.width)+'px';progressTip.style.opacity=1;return n}
  progressTrack.addEventListener('pointermove',e=>tipFromClientX(e.clientX));progressTrack.addEventListener('pointerleave',()=>progressTip.style.opacity=0);progressTrack.addEventListener('click',e=>go(tipFromClientX(e.clientX)));
-restoreFragments();update(false);
+ restoreFragments();update(false);
  setTimeout(()=>{if(!document.documentElement.classList.contains('mathjax-ready'))document.documentElement.classList.add('mathjax-failed')},4500);
 })();
 </script>
