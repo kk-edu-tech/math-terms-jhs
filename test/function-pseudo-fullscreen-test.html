@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TEST｜関数スライド 擬似全画面</title>
+<meta name="description" content="中学1年数学『関数』の意味を、具体例と反例で理解するHTML解説スライド">
+<style>
+:root{
+  --bg:#ffffff;--surface:#ffffff;--text:#0f172a;--muted:#64748b;--line:#dbeafe;
+  --blue:#2563eb;--blue-dark:#1d4ed8;--blue-soft:#eff6ff;
+  --orange:#f59e0b;--orange-soft:#fff7ed;--red:#dc2626;--red-soft:#fff1f2;
+  --shadow:0 16px 34px rgba(15,23,42,.08);--radius:10px;--nav-h:52px;
+}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff;color:var(--text)}
+body{font-family:"BIZ UDPGothic","Yu Gothic UI","Yu Gothic","Hiragino Kaku Gothic ProN",Meiryo,system-ui,sans-serif;font-feature-settings:"palt" 1}
+button{font:inherit}
+.deck{width:100%;height:100%;position:relative;background:#fff}
+.slide{display:none;width:100%;height:100%;padding:20px 34px calc(var(--nav-h) + 12px);background:linear-gradient(180deg,#fff 0%,#f8fbff 100%);overflow:hidden}
+.slide.active{display:grid;grid-template-rows:42px 1fr}
+.header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e2e8f0;color:var(--muted);font-size:15px;font-weight:800}
+.main{width:100%;max-width:1180px;margin:auto;display:flex;flex-direction:column;justify-content:center;gap:18px;min-height:0}
+.title{font-size:clamp(48px,7vw,86px);font-weight:900;line-height:1.12;letter-spacing:-.045em}
+.heading{font-size:clamp(34px,4.4vw,58px);font-weight:900;line-height:1.18;letter-spacing:-.035em}
+.body{font-size:clamp(28px,2.9vw,39px);font-weight:760;line-height:1.55}
+.sub{font-size:clamp(23px,2.1vw,30px);line-height:1.55;color:#334155;font-weight:700}
+.small{font-size:clamp(19px,1.6vw,25px);line-height:1.5;font-weight:760}
+.accent{color:var(--blue)}.important{color:var(--orange)}.danger{color:var(--red)}.center{text-align:center}
+.badge{display:inline-flex;align-items:center;width:max-content;background:var(--blue-soft);color:var(--blue-dark);border:1px solid #bfdbfe;border-radius:999px;padding:7px 14px;font-size:18px;font-weight:900}
+.card{background:var(--surface);border:1px solid #dbeafe;border-radius:var(--radius);padding:22px 28px;box-shadow:var(--shadow)}
+.card.goal,.card.problem,.card.summary{border-left:7px solid var(--blue)}
+.card.hint{border-left:7px solid var(--orange);background:var(--orange-soft)}
+.card.answer{border-left:7px solid var(--orange);background:#fffaf0}
+.card.bad{border-left:7px solid var(--red);background:var(--red-soft);border-color:#fecdd3}
+.label{font-size:15px;color:var(--blue-dark);font-weight:900;letter-spacing:.08em;margin-bottom:8px}
+.strip{background:#f8fbff;border:1px solid #dbeafe;border-left:5px solid var(--blue);border-radius:8px;padding:10px 16px;font-size:clamp(19px,1.55vw,24px);font-weight:760;line-height:1.45;color:#334155}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.flow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+.flowbox{padding:16px 22px;border:1px solid #dbeafe;border-radius:10px;background:#fff;font-size:clamp(26px,2.5vw,36px);font-weight:850;text-align:center;min-width:220px;box-shadow:0 8px 18px rgba(15,23,42,.05)}
+.flowbox.bad{border-color:#fecdd3;background:#fff7f7}
+.arrow{font-size:48px;color:var(--blue);font-weight:900}
+.arrow.bad{color:var(--red)}
+.table-wrap{overflow-x:auto;max-width:100%;border-radius:8px;position:relative}
+.table{width:100%;min-width:540px;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #bfdbfe;border-radius:8px;overflow:hidden;font-size:clamp(27px,2.9vw,40px);text-align:center;font-weight:850}
+.table th,.table td{padding:14px 18px;border-right:1px solid #bfdbfe;border-bottom:1px solid #bfdbfe}
+.table th{background:var(--blue-soft);color:var(--blue-dark);white-space:nowrap}
+.table.red{border-color:#fecdd3}
+.table.red th,.table.red td{border-color:#fecdd3}
+.table.red th{background:#fff1f2;color:#b91c1c}
+.table tr:last-child th,.table tr:last-child td{border-bottom:0}
+.table th:last-child,.table td:last-child{border-right:0}
+.eq{font-size:clamp(44px,5.2vw,74px);font-weight:900;text-align:center;line-height:1.25}
+.poster{max-height:calc(100vh - 140px);max-width:100%;object-fit:contain;border:1px solid #dbeafe;border-radius:14px;box-shadow:var(--shadow);background:#fff}
+.two-posters{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+.two-posters img{width:100%;max-height:calc(100vh - 150px);object-fit:contain;border-radius:14px;border:1px solid #dbeafe;box-shadow:var(--shadow)}
+.fragment{opacity:0;transform:translateY(10px);pointer-events:none}
+.fragment.visible{opacity:1;transform:translateY(0);pointer-events:auto;transition:opacity .28s ease,transform .28s ease}
+.nav{position:fixed;left:0;right:0;bottom:0;height:var(--nav-h);background:#fff;z-index:30;display:grid;grid-template-rows:2px 1fr}
+.progress-track{height:2px;background:#dbeafe;position:relative;cursor:pointer}
+.progress-fill{height:2px;background:var(--blue-dark);width:0%;transition:width .18s ease}
+.progress-tip{position:fixed;bottom:48px;background:var(--blue-dark);color:#fff;border-radius:8px;padding:4px 9px;font-size:14px;font-weight:900;opacity:0;pointer-events:none;z-index:50;transform:translateX(-50%)}
+.nav-row{display:flex;align-items:center;justify-content:center;gap:8px;padding:5px 10px}
+.navbtn,.pagebtn{border:1px solid #bfdbfe;background:var(--blue-soft);color:#1e3a8a;border-radius:8px;font-weight:900;min-height:34px;min-width:42px;cursor:pointer;box-shadow:0 1px 3px rgba(37,99,235,.09);transition:transform .08s ease,background .15s ease}
+.navbtn:active,.pagebtn:active{transform:translateY(1.5px)}
+.pagebtn.current{background:var(--blue-dark);color:#fff}
+.menu{position:fixed;right:14px;bottom:48px;background:#fff;border:1px solid #bfdbfe;border-radius:8px;box-shadow:0 18px 48px rgba(15,23,42,.18);padding:8px;display:none;z-index:60;min-width:210px}
+.menu.open{display:block}
+.menu button{display:flex;width:100%;gap:8px;align-items:center;border:0;background:#fff;border-radius:8px;padding:10px 12px;text-align:left;color:#0f172a;font-weight:850;cursor:pointer}
+.menu button:hover{background:var(--blue-soft)}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.22);z-index:70;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.open{display:flex}
+.dialog{background:#fff;border:1px solid #bfdbfe;border-radius:8px;box-shadow:0 24px 70px rgba(15,23,42,.24);padding:18px;max-width:720px;width:min(94vw,720px);max-height:82vh;overflow:auto}
+.page-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(48px,1fr));gap:8px}
+.print-options{display:grid;gap:10px}
+.print-options label{display:flex;gap:8px;align-items:center;font-size:18px;font-weight:850}
+.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+@media(max-width:780px){
+  :root{--nav-h:54px}
+  .slide{padding:14px 16px calc(var(--nav-h) + 10px);overflow-y:auto}
+  .slide.active{display:block}
+  .header{height:38px}
+  .main{padding:14px 0}
+  .grid,.grid-3,.two-posters{grid-template-columns:1fr}
+  .body{font-size:clamp(27px,6vw,34px)}
+  .strip{font-size:22px}
+  .menu{right:10px;left:auto;max-width:calc(100vw - 20px)}
+  .nav-row{gap:5px}
+  .navbtn{min-width:38px}
+}
+@media(prefers-reduced-motion:reduce){.fragment.visible,.progress-fill{transition:none}}
+@media print{
+  html,body{overflow:visible}
+  .slide,.slide.active{display:grid!important;grid-template-rows:34px 1fr;height:100vh;page-break-after:always;padding:14px 18px 26px;overflow:hidden;background:#fff}
+  .fragment{opacity:1!important;transform:none!important}
+  .nav,.menu,.modal,.math-status{display:none!important}
+  .header::after{content:attr(data-print-page);color:#64748b}
+  .deck.print-current .slide{display:none!important}
+  .deck.print-current .slide.active{display:grid!important}
+  .deck.print-2 .slide{height:50vh;page-break-after:auto}
+  .deck.print-4 .slide{height:50vh;width:50%;float:left;page-break-after:auto}
+  .deck.print-4 .slide:nth-of-type(2n+1){clear:left}
+}
+
+/* 擬似全画面テスト */
+body.pseudo-fullscreen{
+  overflow:hidden;
+}
+body.pseudo-fullscreen .slide{
+  padding:
+    max(10px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right))
+    calc(var(--nav-h) + max(10px, env(safe-area-inset-bottom)))
+    max(12px, env(safe-area-inset-left));
+  background:#fff;
+}
+body.pseudo-fullscreen .header{
+  display:none;
+}
+body.pseudo-fullscreen .main{
+  max-width:100%;
+  height:calc(100dvh - var(--nav-h) - max(10px, env(safe-area-inset-bottom)) - 10px);
+}
+body.pseudo-fullscreen .nav{
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.04,matchFontHeight:false},startup:{pageReady:()=>MathJax.startup.defaultPageReady().then(()=>{document.documentElement.classList.add('mathjax-ready');document.querySelector('.math-status')?.remove();})}}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="document.documentElement.classList.add('mathjax-failed')"></script>
+</head>
+<body>
+<div class="math-status" style="position:fixed;left:10px;bottom:58px;z-index:40;background:#fff;border:1px solid #bfdbfe;border-radius:8px;padding:5px 9px;color:#64748b;font-size:12px">数式を読み込んでいます…</div>
+
+<div class="deck" id="deck">
+  <section class="slide active" data-title="めあて">
+    <header class="header"><span>中学1年数学｜比例・反比例</span><span>用語：関数</span></header>
+    <main class="main center">
+      <span class="badge">今日のめあて</span>
+      <div class="title">関数とは、<br><span class="accent">どんな関係</span>のことだろう？</div>
+      <p class="sub">「xを決めると、yはどうなる？」に注目しよう。</p>
+    </main>
+  </section>
+
+  <section class="slide" data-title="今日扱う問い">
+    <header class="header"><span>中学1年数学｜関数</span><span>今日扱う問い</span></header>
+    <main class="main">
+      <div class="heading center">今日考える2つの問い</div>
+      <div class="grid">
+        <div class="card problem">
+          <div class="label">問い1</div>
+          <div class="body">関数とは、<br>どんな関係のこと？</div>
+        </div>
+        <div class="card problem">
+          <div class="label">問い2</div>
+          <div class="body">関数といえる例と、<br>いえない例の違いは？</div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <section class="slide" data-title="意味">
+    <header class="header"><span>中学1年数学｜関数</span><span>意味</span></header>
+    <main class="main">
+      <div class="heading center">関数は、<br><span class="accent">xを1つ決めると、yが1つに決まる</span>関係。</div>
+      <div class="flow fragment">
+        <div class="flowbox">x<br><span class="small">1つ決める</span></div>
+        <div class="arrow">→</div>
+        <div class="flowbox">y<br><span class="small">1つに決まる</span></div>
+      </div>
+      <div class="card hint fragment">
+        <div class="label">大事な見方</div>
+        <div class="body center">「xが同じなのに、yがいくつもある」なら、関数ではない。</div>
+      </div>
+    </main>
+  </section>
+<section class="slide" data-title="関数といえる例">
+    <header class="header"><span>中学1年数学｜関数</span><span>関数といえる例</span></header>
+    <main class="main">
+      <div class="strip"><b>例</b>1こ120円のパンを x こ買うとき、代金を y 円とする。</div>
+      <div class="heading">x が決まると、y はどう決まる？</div>
+      <div class="table-wrap">
+        <table class="table">
+          <tr><th>x（こ）</th><td>1</td><td>2</td><td>3</td></tr>
+          <tr><th>y（円）</th><td class="fragment">120</td><td class="fragment">240</td><td class="fragment">360</td></tr>
+        </table>
+      </div>
+      <div class="card answer fragment"><div class="label">気づき</div><div class="body center">x の値を1つ決めると、<br>y の値は <span class="accent">ただ1つ</span> に決まる。</div></div>
+    </main>
+  </section>
+
+  <section class="slide" data-title="式で表す">
+    <header class="header"><span>中学1年数学｜関数</span><span>式</span></header>
+    <main class="main center">
+      <div class="heading">パンの代金は、式で表すと…</div>
+      <div class="eq fragment">\[y=120x\]</div>
+      <div class="card answer fragment"><div class="label">答え</div><div class="body center">x を決めると y が1つに決まるので、<br><span class="important">y は x の関数</span> といえる。</div></div>
+    </main>
+  </section>
+
+  <section class="slide" data-title="関数といえない例">
+    <header class="header"><span>中学1年数学｜関数</span><span>関数といえない例</span></header>
+    <main class="main">
+      <div class="strip"><b>例</b>靴のサイズを x cm、身長を y cm とする。</div>
+      <div class="heading">同じ靴のサイズでも、<br>身長は1つに決まるかな？</div>
+      <div class="table-wrap">
+        <table class="table red">
+          <tr><th>x：靴のサイズ</th><td>24.0cm</td><td>24.0cm</td><td>24.0cm</td></tr>
+          <tr><th>y：身長</th><td class="fragment">150cm</td><td class="fragment">160cm</td><td class="fragment">170cm</td></tr>
+        </table>
+      </div>
+      <div class="card bad fragment"><div class="label">気づき</div><div class="body center">1つの x に対して、<br>y がいくつも出てくる。</div></div>
+    </main>
+  </section>
+
+  <section class="slide" data-title="判定">
+    <header class="header"><span>中学1年数学｜関数</span><span>判定</span></header>
+    <main class="main">
+      <div class="grid">
+        <div class="card answer">
+          <div class="label">関数といえる</div>
+          <div class="body center">x を1つ決める<br>↓<br>y が <span class="accent">ただ1つ</span> 決まる</div>
+        </div>
+        <div class="card bad fragment">
+          <div class="label">関数といえない</div>
+          <div class="body center">x を1つ決めても<br>↓<br>y が <span class="danger">1つに決まらない</span></div>
+        </div>
+      </div>
+    </main>
+  </section>
+<section class="slide" data-title="まとめ">
+    <header class="header"><span>中学1年数学｜関数</span><span>まとめ</span></header>
+    <main class="main">
+      <div class="card summary">
+        <div class="label">今日のまとめ</div>
+        <div class="body">関数とは、x の値を1つ決めると、y の値がただ1つに決まる関係のこと。<br>同じ x に対して y がいくつもあるときは、関数とはいえない。<br>表を見るときは、「1つの x に対して y が1つか」を確認する。</div>
+      </div>
+    </main>
+  </section>
+
+</div>
+
+<div class="nav" id="nav"><div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div><div class="nav-row"><button class="navbtn" id="prevBtn" aria-label="戻る">←</button><button class="pagebtn" id="pageBtn" aria-label="スライド一覧"><span id="pageText">1/8</span></button><button class="navbtn" id="nextBtn" aria-label="次へ">→</button><button class="navbtn" id="menuBtn" aria-label="設定メニュー">⋯</button></div></div>
+<div class="progress-tip" id="progressTip">1</div>
+<div class="menu" id="menu"><button data-action="fullscreen">⛶ 全画面表示</button><button data-action="list">▦ スライド一覧</button><button data-action="print">⎙ 印刷・PDF保存</button><button data-action="reset">↺ 最初に戻る</button></div>
+<div class="modal" id="listModal"><div class="dialog"><div class="heading" style="font-size:30px">スライド一覧</div><div class="page-grid" id="pageGrid"></div><div class="dialog-actions"><button class="navbtn" data-close>閉じる</button></div></div></div>
+<div class="modal" id="printModal"><div class="dialog"><div class="heading" style="font-size:30px">印刷・PDF保存</div><div class="print-options"><label><input type="radio" name="printTarget" value="current" checked> 現在のスライドだけ</label><label><input type="radio" name="printTarget" value="all"> すべてのスライド</label><label><input type="radio" name="printLayout" value="1" checked> 1ページに1スライド</label><label><input type="radio" name="printLayout" value="2"> 1ページに2スライド</label><label><input type="radio" name="printLayout" value="4"> 1ページに4スライド</label></div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doPrint">印刷する</button></div></div></div>
+<div class="modal" id="confirmModal"><div class="dialog"><div class="body">最初のスライドに戻りますか？</div><div class="dialog-actions"><button class="navbtn" data-close>キャンセル</button><button class="navbtn" id="doReset">戻る</button></div></div></div>
+
+<script>
+(()=>{
+ const deck=document.getElementById('deck');const slides=[...document.querySelectorAll('.slide')];
+ const key='math-slides-g1-function-v1-state';let index=0;let menuUses=JSON.parse(localStorage.getItem('math-slides-menu-uses')||'{}');
+ try{const s=JSON.parse(localStorage.getItem(key)||'{}');if(Number.isInteger(s.index))index=Math.min(Math.max(s.index,0),slides.length-1)}catch(e){}
+ const pageText=document.getElementById('pageText'),progressFill=document.getElementById('progressFill'),progressTrack=document.getElementById('progressTrack'),progressTip=document.getElementById('progressTip');
+ const menu=document.getElementById('menu'),menuBtn=document.getElementById('menuBtn');
+ function shownFragments(){return [...slides[index].querySelectorAll('.fragment.visible')]}
+ function hiddenFragments(){return [...slides[index].querySelectorAll('.fragment:not(.visible)')]}
+ function save(){localStorage.setItem(key,JSON.stringify({index,fragments:shownFragments().length}))}
+ function restoreFragments(){try{const s=JSON.parse(localStorage.getItem(key)||'{}');slides[index].querySelectorAll('.fragment').forEach((f,i)=>f.classList.toggle('visible',i<(s.fragments||0)))}catch(e){}}
+ function update(resetFragments=false){slides.forEach((s,i)=>{s.classList.toggle('active',i===index);s.classList.remove('print-current');s.querySelector('.header')?.setAttribute('data-print-page',`${i+1}/${slides.length}`)});if(resetFragments)slides[index].querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible'));pageText.textContent=`${index+1}/${slides.length}`;progressFill.style.width=`${(index+1)/slides.length*100}%`;save();}
+ function next(){const fs=hiddenFragments();if(fs.length){fs[0].classList.add('visible');save();return}if(index<slides.length-1){index++;update(true)}}
+ function prev(){const fs=shownFragments();if(fs.length){fs[fs.length-1].classList.remove('visible');save();return}if(index>0){index--;update(true)}}
+ function go(i){index=Math.min(Math.max(i,0),slides.length-1);closeModals();update(true)}
+ function closeMenu(){menu.classList.remove('open')}
+ function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));closeMenu()}
+ function openList(){const grid=document.getElementById('pageGrid');grid.innerHTML='';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='pagebtn'+(i===index?' current':'');b.textContent=i+1;b.onclick=()=>go(i);grid.appendChild(b)});document.getElementById('listModal').classList.add('open')}
+ function toggleFullscreen(){
+   const target=document.documentElement;
+   const fullscreenElement=document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+   const request=target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen;
+   const exit=document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+
+   // iPhoneなど、実全画面が不安定な場合は擬似全画面にする
+   const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+   if(isIOS){
+     document.body.classList.toggle('pseudo-fullscreen');
+     return;
+   }
+
+   if(fullscreenElement){
+     exit?.call(document);
+     return;
+   }
+
+   if(request){
+     try{
+       const result=request.call(target);
+       if(result && typeof result.catch==='function'){
+         result.catch(()=>document.body.classList.toggle('pseudo-fullscreen'));
+       }
+     }catch(e){
+       document.body.classList.toggle('pseudo-fullscreen');
+     }
+   }else{
+     document.body.classList.toggle('pseudo-fullscreen');
+   }
+ }
+ function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
+ menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
+ document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==menuBtn)closeMenu()});
+ menu.addEventListener('click',e=>{const a=e.target.closest('button')?.dataset.action;if(!a)return;menuUses[a]=(menuUses[a]||0)+1;localStorage.setItem('math-slides-menu-uses',JSON.stringify(menuUses));if(a==='fullscreen')toggleFullscreen();if(a==='list')openList();if(a==='print')document.getElementById('printModal').classList.add('open');if(a==='reset')document.getElementById('confirmModal').classList.add('open');closeMenu()});
+ document.getElementById('prevBtn').onclick=prev;document.getElementById('nextBtn').onclick=next;document.getElementById('pageBtn').onclick=openList;document.getElementById('doReset').onclick=reset;document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeModals);
+ document.getElementById('doPrint').onclick=()=>{const target=document.querySelector('[name="printTarget"]:checked').value;const layout=document.querySelector('[name="printLayout"]:checked').value;deck.classList.toggle('print-current',target==='current');deck.classList.remove('print-2','print-4');if(target==='all'&&layout!=='1')deck.classList.add('print-'+layout);setTimeout(()=>window.print(),50)};
+ window.addEventListener('afterprint',()=>deck.classList.remove('print-current','print-2','print-4'));
+ document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}if(e.key==='ArrowLeft'){e.preventDefault();prev()}});
+ let sx=null,sy=null,isScrolling=false,scrollTimer=null;
+ document.addEventListener('scroll',()=>{isScrolling=true;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>isScrolling=false,180)},true);
+ document.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX;sy=e.changedTouches[0].clientY},{passive:true});
+ document.addEventListener('touchend',e=>{if(sx==null||isScrolling)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev()}sx=null;sy=null},{passive:true});
+ function tipFromClientX(x){const r=progressTrack.getBoundingClientRect();const p=Math.min(Math.max((x-r.left)/r.width,0),1);const n=Math.min(slides.length-1,Math.floor(p*slides.length));progressTip.textContent=n+1;progressTip.style.left=(r.left+p*r.width)+'px';progressTip.style.opacity=1;return n}
+ progressTrack.addEventListener('pointermove',e=>tipFromClientX(e.clientX));progressTrack.addEventListener('pointerleave',()=>progressTip.style.opacity=0);progressTrack.addEventListener('click',e=>go(tipFromClientX(e.clientX)));
+ restoreFragments();update(false);
+ setTimeout(()=>{if(!document.documentElement.classList.contains('mathjax-ready'))document.documentElement.classList.add('mathjax-failed')},4500);
+})();
+</script>
+</body>
+</html>
