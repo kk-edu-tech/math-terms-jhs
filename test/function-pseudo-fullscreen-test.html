@@ -174,6 +174,101 @@ body.pseudo-fullscreen .main{
   min-height:calc(100dvh - var(--nav-h) - 20px);
 }
 
+
+/* v3: 横向きiPhoneではスライド内容全体を縮小して1画面に収める */
+@media (max-height: 520px) and (orientation: landscape){
+  :root{
+    --nav-h:44px;
+  }
+
+  .slide{
+    padding:4px 12px calc(var(--nav-h) + 4px);
+    overflow:hidden;
+  }
+
+  .slide.active{
+    display:block;
+  }
+
+  .header{
+    display:none;
+  }
+
+  .main{
+    transform:scale(.74);
+    transform-origin:top center;
+    width:135%;
+    max-width:135%;
+    margin-left:-17.5%;
+    padding:0;
+    gap:8px;
+    justify-content:flex-start;
+    min-height:0;
+  }
+
+  .heading{
+    font-size:clamp(24px,4.8vw,40px);
+    line-height:1.08;
+  }
+
+  .title{
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.08;
+  }
+
+  .body{
+    font-size:clamp(22px,4vw,30px);
+    line-height:1.35;
+  }
+
+  .sub{
+    font-size:clamp(18px,3vw,24px);
+    line-height:1.35;
+  }
+
+  .card{
+    padding:14px 18px;
+  }
+
+  .flowbox{
+    padding:10px 14px;
+    min-width:170px;
+    font-size:clamp(22px,4vw,30px);
+  }
+
+  .table th,
+  .table td{
+    padding:9px 12px;
+  }
+
+  .table{
+    font-size:clamp(22px,4vw,30px);
+  }
+
+  .nav{
+    height:var(--nav-h);
+  }
+
+  .nav-row{
+    padding:3px 8px;
+  }
+
+  .navbtn,
+  .pagebtn{
+    min-height:30px;
+    min-width:38px;
+  }
+}
+
+@media (max-height: 430px) and (orientation: landscape){
+  .main{
+    transform:scale(.66);
+    width:152%;
+    max-width:152%;
+    margin-left:-26%;
+  }
+}
+
 </style>
 <script>
 window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"]],processEscapes:true},chtml:{scale:1.04,matchFontHeight:false},startup:{pageReady:()=>MathJax.startup.defaultPageReady().then(()=>{document.documentElement.classList.add('mathjax-ready');document.querySelector('.math-status')?.remove();})}}
