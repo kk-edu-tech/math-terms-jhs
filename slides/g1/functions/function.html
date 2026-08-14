@@ -244,7 +244,24 @@ window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\
  function closeMenu(){menu.classList.remove('open')}
  function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));closeMenu()}
  function openList(){const grid=document.getElementById('pageGrid');grid.innerHTML='';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='pagebtn'+(i===index?' current':'');b.textContent=i+1;b.onclick=()=>go(i);grid.appendChild(b)});document.getElementById('listModal').classList.add('open')}
- function toggleFullscreen(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.()}
+ function toggleFullscreen(){
+   const target=document.documentElement;
+   const fullscreenElement=document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+   const request=target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen;
+   const exit=document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+
+   if(fullscreenElement){
+     exit?.call(document);
+     return;
+   }
+
+   if(request){
+     try{
+       const result=request.call(target);
+       if(result && typeof result.catch==='function') result.catch(()=>{});
+     }catch(e){}
+   }
+ }
  function reset(){index=0;slides.forEach(s=>s.querySelectorAll('.fragment').forEach(f=>f.classList.remove('visible')));localStorage.removeItem(key);update(true);closeModals()}
  menuBtn.onclick=(e)=>{e.stopPropagation();menu.classList.toggle('open')};
  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==menuBtn)closeMenu()});
