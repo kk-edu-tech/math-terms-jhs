@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>中学生のための数学｜1年数学用語検索 v2</title>
-<meta name="description" content="中学校1年数学の100用語を、単元・キーワードから検索できる学習サイト">
+<title>中学生のための数学｜1〜3年 数学用語検索</title>
+<meta name="description" content="中学校1〜3年の277用語を、学年・単元・キーワードから検索できる学習サイト">
 <style>
 :root{
   --blue:#1672f3;--blue-dark:#0f57c7;--navy:#0b1f4d;--soft:#eef6ff;
@@ -96,7 +96,7 @@ window.MathJax={
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="#"><span class="logo">∑</span><span>中学生のための数学</span></a>
-    <span class="header-note">1年数学用語｜100語統合版 v2</span>
+    <span class="header-note">1〜3年数学用語｜277語統合版</span>
   </div>
 </header>
 
@@ -105,35 +105,35 @@ window.MathJax={
     <div class="hero-main">
       <span class="eyebrow">🔎 用語から数学を理解する</span>
       <h1>数学用語を、<br><span class="marker">見てわかる。</span></h1>
-      <p>中学1年の100用語を、単元・ことば・意味から探せます。用語を押すと、一言説明・数式・関連用語をまとめて確認できます。</p>
+      <p>中学1〜3年の277用語を、学年・単元・ことば・意味から探せます。用語を押すと、一言説明・数式・関連用語をまとめて確認できます。</p>
     </div>
     <aside class="hero-card">
-      <div class="stat"><span>収録用語</span><b>100</b></div>
-      <div class="stat"><span>一言説明 OK</span><b>99</b></div>
-      <div class="stat"><span>要修正</span><b>1</b></div>
-      <div class="stat"><span>単元</span><b>7</b></div>
+      <div class="stat"><span>収録用語</span><b>277</b></div>
+      <div class="stat"><span>1年</span><b>100</b></div>
+      <div class="stat"><span>2年</span><b>90</b></div>
+      <div class="stat"><span>3年</span><b>87</b></div>
     </aside>
   </section>
 
   <section class="search-panel">
     <div class="search-box">
       <div class="search-row">
-        <input id="q" type="search" placeholder="例：比例、マイナス、直角、中央値…">
+        <input id="q" type="search" placeholder="例：比例、連立方程式、平方根、円周角…">
         <select id="unitSelect">
           <option value="all">すべての単元</option>
-          <option value="g1-seifu">正の数・負の数</option><option value="g1-moji">文字の式</option><option value="g1-hoteishiki">方程式</option><option value="g1-henkatotaiou">比例・反比例</option><option value="g1-heimen">平面図形</option><option value="g1-kukan">空間図形</option><option value="g1-data">データの活用</option>
         </select>
       </div>
       <div class="tabs">
-        <button class="tab active" data-status="all">すべて</button>
-        <button class="tab" data-status="ok">内容確認済み</button>
-        <button class="tab" data-status="revise">要修正</button>
+        <button class="tab active" data-grade="all">すべて</button>
+        <button class="tab" data-grade="1">1年</button>
+        <button class="tab" data-grade="2">2年</button>
+        <button class="tab" data-grade="3">3年</button>
       </div>
     </div>
   </section>
 
   <div class="section-head">
-    <h2>1年生の数学用語</h2>
+    <h2 id="sectionTitle">1〜3年の数学用語</h2>
     <div class="count" id="count"></div>
   </div>
   <section class="grid" id="grid"></section>
@@ -315,7 +315,7 @@ const TERMS=[
     "category": "数と式",
     "summary": "数直線上で、ある数から0までの距離。",
     "status": "ok",
-    "formula": "\\[|a|\\]",
+    "formula": "\[|a|\]",
     "keywords": [
       "距離",
       "0",
@@ -573,7 +573,7 @@ const TERMS=[
     "category": "数と式",
     "summary": "同じ数をいくつかかけ合わせること。",
     "status": "ok",
-    "formula": "\\[a^n\\]",
+    "formula": "\[a^n\]",
     "keywords": [
       "指数",
       "べき",
@@ -595,7 +595,7 @@ const TERMS=[
     "category": "数と式",
     "summary": "累乗で、同じ数を何個かけるかを表す右上の小さい数。",
     "status": "ok",
-    "formula": "\\[a^n\\]",
+    "formula": "\[a^n\]",
     "keywords": [
       "累乗",
       "右上",
@@ -848,7 +848,7 @@ const TERMS=[
     "category": "数と式",
     "summary": "文字式で、わり算を分数の形で表す方法。",
     "status": "ok",
-    "formula": "\\[a\\div b=\\frac{a}{b}\\]",
+    "formula": "\[a\div b=\frac{a}{b}\]",
     "keywords": [
       "わり算",
       "分数",
@@ -872,7 +872,7 @@ const TERMS=[
     "category": "数と式",
     "summary": "文字の値によって、成り立ったり成り立たなかったりする等式。",
     "status": "ok",
-    "formula": "\\[ax+b=c\\]",
+    "formula": "\[ax+b=c\]",
     "keywords": [
       "等式",
       "x",
@@ -1227,7 +1227,7 @@ const TERMS=[
     "category": "関数",
     "summary": "xが2倍、3倍…になると、yも2倍、3倍…になる関係。",
     "status": "ok",
-    "formula": "\\[y=ax\\]",
+    "formula": "\[y=ax\]",
     "keywords": [
       "y=ax",
       "比例定数",
@@ -1257,7 +1257,7 @@ const TERMS=[
     "category": "関数",
     "summary": "比例の関係を y=ax の形で表した式。",
     "status": "ok",
-    "formula": "\\[y=ax\\]",
+    "formula": "\[y=ax\]",
     "keywords": [
       "y=ax",
       "比例",
@@ -1286,7 +1286,7 @@ const TERMS=[
     "category": "関数",
     "summary": "比例の式 y=ax で、xにかかっている決まった数a。",
     "status": "ok",
-    "formula": "\\[a=\\frac{y}{x}\\]",
+    "formula": "\[a=\frac{y}{x}\]",
     "keywords": [
       "a",
       "y=ax",
@@ -1345,7 +1345,7 @@ const TERMS=[
     "category": "関数",
     "summary": "平面上の点の位置を、2つの数の組で表したもの。",
     "status": "ok",
-    "formula": "\\[(x,y)\\]",
+    "formula": "\[(x,y)\]",
     "keywords": [
       "点",
       "位置",
@@ -1439,7 +1439,7 @@ const TERMS=[
     "category": "関数",
     "summary": "x軸とy軸が交わる点。",
     "status": "ok",
-    "formula": "\\[(0,0)\\]",
+    "formula": "\[(0,0)\]",
     "keywords": [
       "0,0",
       "x軸",
@@ -1530,7 +1530,7 @@ const TERMS=[
     "category": "関数",
     "summary": "比例 y=ax の関係を表した、原点を通る直線のグラフ。",
     "status": "ok",
-    "formula": "\\[y=ax\\]",
+    "formula": "\[y=ax\]",
     "keywords": [
       "原点",
       "直線",
@@ -1559,7 +1559,7 @@ const TERMS=[
     "category": "関数",
     "summary": "xが2倍、3倍…になると、yは1/2倍、1/3倍…になる関係。",
     "status": "ok",
-    "formula": "\\[y=\\frac{a}{x}\\]",
+    "formula": "\[y=\frac{a}{x}\]",
     "keywords": [
       "y=a/x",
       "積",
@@ -1588,7 +1588,7 @@ const TERMS=[
     "category": "関数",
     "summary": "反比例の関係を y=a/x の形で表した式。",
     "status": "ok",
-    "formula": "\\[y=\\frac{a}{x}\\]",
+    "formula": "\[y=\frac{a}{x}\]",
     "keywords": [
       "y=a/x",
       "反比例",
@@ -1617,7 +1617,7 @@ const TERMS=[
     "category": "関数",
     "summary": "反比例の式 y=a/x で使われる決まった数a。",
     "status": "ok",
-    "formula": "\\[a=xy\\]",
+    "formula": "\[a=xy\]",
     "keywords": [
       "a",
       "xy",
@@ -1676,7 +1676,7 @@ const TERMS=[
     "category": "関数",
     "summary": "反比例 y=a/x の関係を表した、2つに分かれた曲線のグラフ。双曲線とも言う。",
     "status": "revise",
-    "formula": "\\[y=\\frac{a}{x}\\]",
+    "formula": "\[y=\frac{a}{x}\]",
     "keywords": [
       "曲線",
       "双曲線",
@@ -2669,7 +2669,7 @@ const TERMS=[
     "category": "データの活用",
     "summary": "全体の度数に対する、ある階級の度数の割合。",
     "status": "ok",
-    "formula": "\\[\\frac{\\text{ある階級の度数}}{\\text{全体の度数}}\\]",
+    "formula": "\[\frac{\text{ある階級の度数}}{\text{全体の度数}}\]",
     "keywords": [
       "割合",
       "度数",
@@ -2742,7 +2742,7 @@ const TERMS=[
     "category": "データの活用",
     "summary": "すべての値の合計を、データの個数で割った値。",
     "status": "ok",
-    "formula": "\\[\\frac{\\text{値の合計}}{\\text{データの個数}}\\]",
+    "formula": "\[\frac{\text{値の合計}}{\text{データの個数}}\]",
     "keywords": [
       "合計",
       "個数",
@@ -2816,7 +2816,7 @@ const TERMS=[
     "category": "データの活用",
     "summary": "データの最大値と最小値の差。",
     "status": "ok",
-    "formula": "\\[\\text{最大値}-\\text{最小値}\\]",
+    "formula": "\[\text{最大値}-\text{最小値}\]",
     "keywords": [
       "最大値",
       "最小値",
@@ -2829,6 +2829,3302 @@ const TERMS=[
     "relatedNames": [
       "データ"
     ]
+  },
+  {
+    "id": "g2-t001",
+    "name": "単項式",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "数や文字について、かけ算だけでつくられた式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t002",
+    "name": "多項式",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "単項式の和として表された式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t003",
+    "name": "次数",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "単項式で、かけ合わされている文字の個数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t004",
+    "name": "多項式の次数",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "多項式の各項の次数のうち、最も大きいもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t005",
+    "name": "一次式",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "次数が1の多項式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t006",
+    "name": "二次式",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "次数が2の多項式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t007",
+    "name": "同類項",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "文字の部分が同じ項。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t008",
+    "name": "同類項をまとめる",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "同類項の係数を計算して、1つの項にすること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t009",
+    "name": "式の加法",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "2つ以上の式をたす計算。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t010",
+    "name": "式の減法",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "ある式から別の式をひく計算。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t011",
+    "name": "単項式の乗法",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "単項式どうしをかける計算。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t012",
+    "name": "単項式の除法",
+    "grade": 2,
+    "unitId": "g2-shiki",
+    "unit": "式の計算",
+    "category": "式の計算",
+    "summary": "単項式を単項式でわる計算。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t013",
+    "name": "二元一次方程式",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "2つの文字をふくむ一次方程式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t014",
+    "name": "二元一次方程式の解",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "二元一次方程式を成り立たせる、2つの文字の値の組。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t015",
+    "name": "連立方程式",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "同じ文字をふくむ2つ以上の方程式を、組にしたもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t016",
+    "name": "連立方程式の解",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "組になったすべての方程式を、同時に成り立たせる文字の値の組。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t017",
+    "name": "連立方程式を解く",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "連立方程式の解を求めること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t018",
+    "name": "加減法",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "2つの式をたしたりひいたりして、一方の文字を消す方法。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t019",
+    "name": "代入法",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "一方の式を文字について解き、その式をもう一方の式に代入する方法。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t020",
+    "name": "消去",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "一方の文字をなくして、1つの文字だけの方程式にすること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t021",
+    "name": "xを消去する",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "式をたしたりひいたりして、xの項をなくすこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t022",
+    "name": "yを消去する",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "式をたしたりひいたりして、yの項をなくすこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t023",
+    "name": "係数をそろえる",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "消したい文字の係数の絶対値が同じになるように式を変えること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t024",
+    "name": "解の組",
+    "grade": 2,
+    "unitId": "g2-renritsu",
+    "unit": "連立方程式",
+    "category": "連立方程式",
+    "summary": "2つの文字の値を、1つの組として表したもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t025",
+    "name": "一次関数",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "xとyの関係が y=ax+b の形で表される関数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t026",
+    "name": "一次関数の式",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "一次関数の関係を y=ax+b の形で表した式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t027",
+    "name": "xの増加量",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "xの値がどれだけ変化したかを表す量。「あとの値－まえの値」で求める。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t028",
+    "name": "yの増加量",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "yの値がどれだけ変化したかを表す量。「あとの値－まえの値」で求める。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t029",
+    "name": "変化の割合",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "xの増加量に対して、yがどれだけ変化したかを表す割合。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t030",
+    "name": "一次関数の変化の割合",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "一次関数でいつも一定になる変化の割合。y=ax+bではaにあたる。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t031",
+    "name": "傾き",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "一次関数のグラフの傾き具合を表す数。変化の割合と同じ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t032",
+    "name": "切片",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "一次関数のグラフがy軸と交わる点のy座標。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t033",
+    "name": "一次関数の表",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "一次関数のxとyの対応を、表にしたもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t034",
+    "name": "一次関数のグラフ",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "一次関数のxとyの関係を座標平面に表した直線。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t035",
+    "name": "右上がり",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "xが増えると、yも増えるグラフの向き。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t036",
+    "name": "右下がり",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "xが増えると、yは減るグラフの向き。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t037",
+    "name": "傾きが正",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "傾きが0より大きく、グラフが右上がりになること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t038",
+    "name": "傾きが負",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "傾きが0より小さく、グラフが右下がりになること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t039",
+    "name": "二元一次方程式のグラフ",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "二元一次方程式を成り立たせるx、yの組を、座標平面に表した直線。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t040",
+    "name": "2直線の交点",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "2本の直線が交わる点。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t041",
+    "name": "連立方程式の解と交点",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "2つの方程式のグラフの交点の座標が、連立方程式の解になる関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t042",
+    "name": "グラフから式を求める",
+    "grade": 2,
+    "unitId": "g2-ichiji",
+    "unit": "一次関数",
+    "category": "一次関数",
+    "summary": "グラフの傾きや切片を読み取り、一次関数の式をつくること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t043",
+    "name": "同位角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "2直線に1本の直線が交わるとき、同じ位置にできる角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t044",
+    "name": "錯角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "2直線に1本の直線が交わるとき、2直線の内側で交わる直線の反対側にできる角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t045",
+    "name": "平行線と同位角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "2直線が平行なら、同位角は等しくなるという関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t046",
+    "name": "平行線と錯角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "2直線が平行なら、錯角は等しくなるという関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t047",
+    "name": "平行線になる条件",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "同位角が等しい、または錯角が等しいとき、2直線は平行になるという条件。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t048",
+    "name": "三角形の内角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "三角形の内側にできる3つの角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t049",
+    "name": "三角形の外角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "三角形の1辺と、そのとなりの辺の延長でできる外側の角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t050",
+    "name": "多角形の内角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "多角形の内側にできる、各頂点の角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t051",
+    "name": "多角形の外角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "多角形の1辺と、そのとなりの辺の延長でできる外側の角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t052",
+    "name": "合同",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "形も大きさも同じで、重ねるとぴったり重なる関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t053",
+    "name": "合同な図形",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "形も大きさも同じで、重ねるとぴったり重なる図形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t054",
+    "name": "対応する辺・角",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "合同な図形で、重ねたときに重なり合う辺や角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t055",
+    "name": "三角形の合同条件",
+    "grade": 2,
+    "unitId": "g2-heikou",
+    "unit": "平行と合同",
+    "category": "平行と合同",
+    "summary": "2つの三角形が合同だといえるための3つの条件。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t056",
+    "name": "証明",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "根拠を示しながら、筋道を立てて正しいことを説明すること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t057",
+    "name": "仮定",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "証明するときに、はじめからわかっていること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t058",
+    "name": "結論",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "仮定から導いて、証明したいこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t059",
+    "name": "定義",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "言葉や図形の意味を、はっきり決めたもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t060",
+    "name": "定理",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "すでに正しいことが証明され、根拠として使える事柄。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t061",
+    "name": "根拠",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "その考えや式が正しいといえる理由。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t062",
+    "name": "二等辺三角形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "2つの辺の長さが等しい三角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t063",
+    "name": "二等辺三角形の性質",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "二等辺三角形では2つの底角が等しい、などのきまり。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t064",
+    "name": "二等辺三角形になる条件",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "2つの角が等しい三角形は、二等辺三角形になるという条件。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t065",
+    "name": "底辺",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "二等辺三角形で、長さの等しい2辺以外の辺。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t066",
+    "name": "頂角",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "二等辺三角形で、長さの等しい2辺の間にある角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t067",
+    "name": "底角",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "二等辺三角形で、底辺の両端にある2つの角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t068",
+    "name": "正三角形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "3つの辺の長さがすべて等しい三角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t069",
+    "name": "直角三角形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "1つの角が直角である三角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t070",
+    "name": "平行四辺形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "2組の対辺が、それぞれ平行な四角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t071",
+    "name": "平行四辺形の性質",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "対辺や対角がそれぞれ等しいなど、平行四辺形がもつきまり。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t072",
+    "name": "平行四辺形になる条件",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "四角形が平行四辺形だといえるための条件。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t073",
+    "name": "長方形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "4つの角がすべて直角である四角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t074",
+    "name": "ひし形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "4つの辺の長さがすべて等しい四角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t075",
+    "name": "正方形",
+    "grade": 2,
+    "unitId": "g2-shoumei",
+    "unit": "三角形・四角形と証明",
+    "category": "三角形・四角形と証明",
+    "summary": "4つの辺が等しく、4つの角がすべて直角である四角形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t076",
+    "name": "場合の数",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "条件に合う起こり方が、全部で何通りあるかを表した数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t077",
+    "name": "起こりうる場合",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "ある試行で、起こる可能性のあるすべての場合。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t078",
+    "name": "同様に確からしい",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "どの場合が起こる可能性も、同じと考えられること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t079",
+    "name": "確率",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "あることの起こりやすさを、0から1までの数で表したもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t080",
+    "name": "樹形図",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "起こりうる場合を、枝分かれさせて整理した図。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t081",
+    "name": "表を使った場合分け",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "組合せなどを表に並べ、もれなく整理する方法。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t082",
+    "name": "余事象",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "ある事象が起こらないことを表す事象。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t083",
+    "name": "少なくとも",
+    "grade": 2,
+    "unitId": "g2-kakuritsu",
+    "unit": "確率",
+    "category": "確率",
+    "summary": "「その数以上ならよい」という意味。たとえば「少なくとも1つ」は「1つ以上」。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t084",
+    "name": "四分位数",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "データを小さい順に並べ、4つの部分に分ける境目となる値。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t085",
+    "name": "第1四分位数",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "小さい方の半分のデータの中央値。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t086",
+    "name": "第2四分位数",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "データ全体の中央値。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t087",
+    "name": "第3四分位数",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "大きい方の半分のデータの中央値。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t088",
+    "name": "四分位範囲",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "第3四分位数から第1四分位数をひいた値。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t089",
+    "name": "箱ひげ図",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "最小値・四分位数・最大値を使って、データの散らばりを表した図。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g2-t090",
+    "name": "箱ひげ図の読み取り",
+    "grade": 2,
+    "unitId": "g2-data",
+    "unit": "箱ひげ図とデータの活用",
+    "category": "箱ひげ図とデータの活用",
+    "summary": "箱やひげの位置や長さから、中央値やデータの散らばりを比べること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [],
+    "relatedNames": []
+  },
+  {
+    "id": "g3-t001",
+    "name": "展開",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "かっこを外して、式をたし算・ひき算の形にすること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t002",
+      "g3-t003",
+      "g3-t007",
+      "g3-t004"
+    ],
+    "relatedNames": [
+      "分配法則",
+      "乗法公式",
+      "因数分解",
+      "平方の形"
+    ]
+  },
+  {
+    "id": "g3-t002",
+    "name": "分配法則",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "かっこの外の数を、かっこの中のそれぞれの項にかけるきまり。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t001",
+      "g3-t003",
+      "g3-t008",
+      "g1-t018"
+    ],
+    "relatedNames": [
+      "展開",
+      "乗法公式",
+      "共通因数でくくる",
+      "文字式"
+    ]
+  },
+  {
+    "id": "g3-t003",
+    "name": "乗法公式",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "よく出るかけ算を、すばやく展開するための公式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t001",
+      "g3-t004",
+      "g3-t009",
+      "g3-t010"
+    ],
+    "relatedNames": [
+      "展開",
+      "平方の形",
+      "完全平方",
+      "和と差の積"
+    ]
+  },
+  {
+    "id": "g3-t004",
+    "name": "平方の形",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "同じ式を2回かけた形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t012",
+      "g3-t009",
+      "g3-t003",
+      "g3-t007"
+    ],
+    "relatedNames": [
+      "平方",
+      "完全平方",
+      "乗法公式",
+      "因数分解"
+    ]
+  },
+  {
+    "id": "g3-t005",
+    "name": "因数",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "かけ算の形で表したときの、それぞれの式や数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t007",
+      "g3-t006",
+      "g3-t011",
+      "g1-t014"
+    ],
+    "relatedNames": [
+      "因数分解",
+      "共通因数",
+      "素因数分解",
+      "積"
+    ]
+  },
+  {
+    "id": "g3-t006",
+    "name": "共通因数",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "いくつかの項に共通してふくまれている因数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t005",
+      "g3-t007",
+      "g3-t008",
+      "g3-t002"
+    ],
+    "relatedNames": [
+      "因数",
+      "因数分解",
+      "共通因数でくくる",
+      "分配法則"
+    ]
+  },
+  {
+    "id": "g3-t007",
+    "name": "因数分解",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "たし算・ひき算の式を、かけ算の形に直すこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t005",
+      "g3-t006",
+      "g3-t001",
+      "g3-t009",
+      "g3-t028"
+    ],
+    "relatedNames": [
+      "因数",
+      "共通因数",
+      "展開",
+      "完全平方",
+      "二次方程式"
+    ]
+  },
+  {
+    "id": "g3-t008",
+    "name": "共通因数でくくる",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "共通している因数を、かっこの外に出すこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t006",
+      "g3-t007",
+      "g3-t002"
+    ],
+    "relatedNames": [
+      "共通因数",
+      "因数分解",
+      "分配法則"
+    ]
+  },
+  {
+    "id": "g3-t009",
+    "name": "完全平方",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "同じ式を2回かけた形に因数分解できる式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t004",
+      "g3-t003",
+      "g3-t007",
+      "g3-t012"
+    ],
+    "relatedNames": [
+      "平方の形",
+      "乗法公式",
+      "因数分解",
+      "平方"
+    ]
+  },
+  {
+    "id": "g3-t010",
+    "name": "和と差の積",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "同じ2つの数や式の「和」と「差」をかけた形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t003",
+      "g3-t007",
+      "g3-t004"
+    ],
+    "relatedNames": [
+      "乗法公式",
+      "因数分解",
+      "平方の形"
+    ]
+  },
+  {
+    "id": "g3-t011",
+    "name": "素因数分解",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "自然数を、素数だけの積で表すこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t005",
+      "g3-t012",
+      "g1-t003"
+    ],
+    "relatedNames": [
+      "因数",
+      "平方",
+      "自然数"
+    ]
+  },
+  {
+    "id": "g3-t012",
+    "name": "平方",
+    "grade": 3,
+    "unitId": "g3-tenkai",
+    "unit": "式の展開と因数分解",
+    "category": "数と式",
+    "summary": "同じ数や式を2回かけること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t013",
+      "g3-t004",
+      "g3-t009",
+      "g1-t016"
+    ],
+    "relatedNames": [
+      "平方根",
+      "平方の形",
+      "完全平方",
+      "累乗"
+    ]
+  },
+  {
+    "id": "g3-t013",
+    "name": "平方根",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "2乗すると、もとの数になる数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t014",
+      "g3-t015",
+      "g3-t016",
+      "g3-t012",
+      "g3-t023"
+    ],
+    "relatedNames": [
+      "正の平方根",
+      "負の平方根",
+      "根号",
+      "平方",
+      "無理数"
+    ]
+  },
+  {
+    "id": "g3-t014",
+    "name": "正の平方根",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "平方根のうち、0より大きい方の数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t013",
+      "g3-t015",
+      "g3-t016"
+    ],
+    "relatedNames": [
+      "平方根",
+      "負の平方根",
+      "根号"
+    ]
+  },
+  {
+    "id": "g3-t015",
+    "name": "負の平方根",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "平方根のうち、0より小さい方の数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t013",
+      "g3-t014",
+      "g3-t016",
+      "g1-t002"
+    ],
+    "relatedNames": [
+      "平方根",
+      "正の平方根",
+      "根号",
+      "負の数"
+    ]
+  },
+  {
+    "id": "g3-t016",
+    "name": "根号",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "平方根を表すときに使う「√」の記号。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t013",
+      "g3-t017",
+      "g3-t020",
+      "g3-t021"
+    ],
+    "relatedNames": [
+      "平方根",
+      "根号の中",
+      "根号を含む式",
+      "分母の有理化"
+    ]
+  },
+  {
+    "id": "g3-t017",
+    "name": "根号の中",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "√の記号の内側に書かれている数や式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t016",
+      "g3-t019",
+      "g3-t020"
+    ],
+    "relatedNames": [
+      "根号",
+      "根号の中を簡単にする",
+      "根号を含む式"
+    ]
+  },
+  {
+    "id": "g3-t018",
+    "name": "根号を使わない形",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "√を使わずに表せる形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t013",
+      "g3-t016",
+      "g3-t019"
+    ],
+    "relatedNames": [
+      "平方根",
+      "根号",
+      "根号の中を簡単にする"
+    ]
+  },
+  {
+    "id": "g3-t019",
+    "name": "根号の中を簡単にする",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "√の中から平方になっている部分を外に出して簡単にすること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t016",
+      "g3-t017",
+      "g3-t012",
+      "g3-t011"
+    ],
+    "relatedNames": [
+      "根号",
+      "根号の中",
+      "平方",
+      "素因数分解"
+    ]
+  },
+  {
+    "id": "g3-t020",
+    "name": "根号を含む式",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "√を使った数や式をふくむ式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t016",
+      "g3-t017",
+      "g3-t021"
+    ],
+    "relatedNames": [
+      "根号",
+      "根号の中",
+      "分母の有理化"
+    ]
+  },
+  {
+    "id": "g3-t021",
+    "name": "分母の有理化",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "分母に√がある分数を、分母に√がない形に直すこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t016",
+      "g3-t020",
+      "g3-t022",
+      "g3-t023"
+    ],
+    "relatedNames": [
+      "根号",
+      "根号を含む式",
+      "有理数",
+      "無理数"
+    ]
+  },
+  {
+    "id": "g3-t022",
+    "name": "有理数",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "整数どうしの分数で表せる数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t023",
+      "g3-t024",
+      "g3-t025",
+      "g3-t027"
+    ],
+    "relatedNames": [
+      "無理数",
+      "実数",
+      "有限小数",
+      "循環小数"
+    ]
+  },
+  {
+    "id": "g3-t023",
+    "name": "無理数",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "整数どうしの分数では表せない数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t022",
+      "g3-t024",
+      "g3-t013",
+      "g3-t026"
+    ],
+    "relatedNames": [
+      "有理数",
+      "実数",
+      "平方根",
+      "無限小数"
+    ]
+  },
+  {
+    "id": "g3-t024",
+    "name": "実数",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "数直線上の点として表せる数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t022",
+      "g3-t023",
+      "g1-t005"
+    ],
+    "relatedNames": [
+      "有理数",
+      "無理数",
+      "数直線"
+    ]
+  },
+  {
+    "id": "g3-t025",
+    "name": "有限小数",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "小数のけたが途中で終わる小数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t026",
+      "g3-t027",
+      "g3-t022"
+    ],
+    "relatedNames": [
+      "無限小数",
+      "循環小数",
+      "有理数"
+    ]
+  },
+  {
+    "id": "g3-t026",
+    "name": "無限小数",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "小数のけたがどこまでも続く小数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t025",
+      "g3-t027",
+      "g3-t023"
+    ],
+    "relatedNames": [
+      "有限小数",
+      "循環小数",
+      "無理数"
+    ]
+  },
+  {
+    "id": "g3-t027",
+    "name": "循環小数",
+    "grade": 3,
+    "unitId": "g3-heihokon",
+    "unit": "平方根",
+    "category": "数と式",
+    "summary": "同じ数字の並びがくり返し続く小数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t025",
+      "g3-t026",
+      "g3-t022"
+    ],
+    "relatedNames": [
+      "有限小数",
+      "無限小数",
+      "有理数"
+    ]
+  },
+  {
+    "id": "g3-t028",
+    "name": "二次方程式",
+    "grade": 3,
+    "unitId": "g3-nijihoteishiki",
+    "unit": "二次方程式",
+    "category": "数と式",
+    "summary": "整理すると、x²をふくむ形になる方程式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t029",
+      "g3-t030",
+      "g3-t031",
+      "g3-t007",
+      "g1-t028"
+    ],
+    "relatedNames": [
+      "二次方程式の解",
+      "二次方程式を解く",
+      "解の公式",
+      "因数分解",
+      "方程式"
+    ]
+  },
+  {
+    "id": "g3-t029",
+    "name": "二次方程式の解",
+    "grade": 3,
+    "unitId": "g3-nijihoteishiki",
+    "unit": "二次方程式",
+    "category": "数と式",
+    "summary": "二次方程式を成り立たせるxの値。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t028",
+      "g3-t030",
+      "g1-t032",
+      "g3-t031"
+    ],
+    "relatedNames": [
+      "二次方程式",
+      "二次方程式を解く",
+      "解",
+      "解の公式"
+    ]
+  },
+  {
+    "id": "g3-t030",
+    "name": "二次方程式を解く",
+    "grade": 3,
+    "unitId": "g3-nijihoteishiki",
+    "unit": "二次方程式",
+    "category": "数と式",
+    "summary": "二次方程式を成り立たせるxの値を求めること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t028",
+      "g3-t029",
+      "g3-t031",
+      "g3-t007"
+    ],
+    "relatedNames": [
+      "二次方程式",
+      "二次方程式の解",
+      "解の公式",
+      "因数分解"
+    ]
+  },
+  {
+    "id": "g3-t031",
+    "name": "解の公式",
+    "grade": 3,
+    "unitId": "g3-nijihoteishiki",
+    "unit": "二次方程式",
+    "category": "数と式",
+    "summary": "二次方程式の解を求めるために使う公式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t028",
+      "g3-t029",
+      "g3-t030",
+      "g3-t013"
+    ],
+    "relatedNames": [
+      "二次方程式",
+      "二次方程式の解",
+      "二次方程式を解く",
+      "平方根"
+    ]
+  },
+  {
+    "id": "g3-t032",
+    "name": "関数 y=ax^2",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "yがx²に比例する関数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t033",
+      "g3-t034",
+      "g3-t035",
+      "g3-t036",
+      "g1-t036"
+    ],
+    "relatedNames": [
+      "二乗に比例する",
+      "y=ax^2 の表",
+      "y=ax^2 のグラフ",
+      "放物線",
+      "関数"
+    ]
+  },
+  {
+    "id": "g3-t033",
+    "name": "二乗に比例する",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "xを2乗した値に、yが一定の割合で対応する関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t032",
+      "g1-t040",
+      "g1-t042",
+      "g3-t012"
+    ],
+    "relatedNames": [
+      "関数 y=ax^2",
+      "比例",
+      "比例定数",
+      "平方"
+    ]
+  },
+  {
+    "id": "g3-t034",
+    "name": "y=ax^2 の表",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "y=ax²で、xとyの対応を表にしたもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t032",
+      "g3-t035",
+      "g3-t033",
+      "g1-t038"
+    ],
+    "relatedNames": [
+      "関数 y=ax^2",
+      "y=ax^2 のグラフ",
+      "二乗に比例する",
+      "対応"
+    ]
+  },
+  {
+    "id": "g3-t035",
+    "name": "y=ax^2 のグラフ",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "y=ax²の関係を座標平面に表したグラフ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t032",
+      "g3-t036",
+      "g3-t037",
+      "g3-t039",
+      "g3-t040"
+    ],
+    "relatedNames": [
+      "関数 y=ax^2",
+      "放物線",
+      "軸",
+      "上に開く",
+      "下に開く"
+    ]
+  },
+  {
+    "id": "g3-t036",
+    "name": "放物線",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "y=ax²のグラフのような、なめらかな曲線。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t035",
+      "g3-t037",
+      "g3-t039",
+      "g3-t040"
+    ],
+    "relatedNames": [
+      "y=ax^2 のグラフ",
+      "軸",
+      "上に開く",
+      "下に開く"
+    ]
+  },
+  {
+    "id": "g3-t037",
+    "name": "軸",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "放物線を左右に折り重ねると重なる、対称の中心となる直線。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t036",
+      "g3-t035",
+      "g3-t038",
+      "g1-t071"
+    ],
+    "relatedNames": [
+      "放物線",
+      "y=ax^2 のグラフ",
+      "y軸について対称",
+      "対称の軸"
+    ]
+  },
+  {
+    "id": "g3-t038",
+    "name": "y軸について対称",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "y軸を折り目にすると、左右がぴったり重なること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t037",
+      "g3-t036",
+      "g1-t049",
+      "g1-t071"
+    ],
+    "relatedNames": [
+      "軸",
+      "放物線",
+      "y軸",
+      "対称の軸"
+    ]
+  },
+  {
+    "id": "g3-t039",
+    "name": "上に開く",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "放物線が上向きに広がっている形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t036",
+      "g3-t040",
+      "g3-t035"
+    ],
+    "relatedNames": [
+      "放物線",
+      "下に開く",
+      "y=ax^2 のグラフ"
+    ]
+  },
+  {
+    "id": "g3-t040",
+    "name": "下に開く",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "放物線が下向きに広がっている形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t036",
+      "g3-t039",
+      "g3-t035"
+    ],
+    "relatedNames": [
+      "放物線",
+      "上に開く",
+      "y=ax^2 のグラフ"
+    ]
+  },
+  {
+    "id": "g3-t041",
+    "name": "y=ax^2 の変化の割合",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "xの増加量に対して、yがどれだけ変化したかを表す割合。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t032",
+      "g2-t029",
+      "g3-t042",
+      "g2-t027",
+      "g2-t028"
+    ],
+    "relatedNames": [
+      "関数 y=ax^2",
+      "変化の割合",
+      "平均の速さ",
+      "xの増加量",
+      "yの増加量"
+    ]
+  },
+  {
+    "id": "g3-t042",
+    "name": "平均の速さ",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "ある時間全体でならした1あたりの速さ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t043",
+      "g3-t041",
+      "g2-t029"
+    ],
+    "relatedNames": [
+      "瞬間の速さ",
+      "y=ax^2 の変化の割合",
+      "変化の割合"
+    ]
+  },
+  {
+    "id": "g3-t043",
+    "name": "瞬間の速さ",
+    "grade": 3,
+    "unitId": "g3-nijikansu",
+    "unit": "関数 y=ax^2",
+    "category": "関数",
+    "summary": "ある一瞬の速さ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t042",
+      "g3-t041"
+    ],
+    "relatedNames": [
+      "平均の速さ",
+      "y=ax^2 の変化の割合"
+    ]
+  },
+  {
+    "id": "g3-t044",
+    "name": "相似",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "形が同じで、大きさだけが違う図形どうしの関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t045",
+      "g3-t048",
+      "g3-t049",
+      "g2-t052"
+    ],
+    "relatedNames": [
+      "相似な図形",
+      "相似比",
+      "三角形の相似条件",
+      "合同"
+    ]
+  },
+  {
+    "id": "g3-t045",
+    "name": "相似な図形",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "形が同じで、大きさだけが違う図形。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t046",
+      "g3-t047",
+      "g3-t048"
+    ],
+    "relatedNames": [
+      "相似",
+      "相似の記号",
+      "対応する頂点",
+      "相似比"
+    ]
+  },
+  {
+    "id": "g3-t046",
+    "name": "相似の記号",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの図形が相似であることを表す「∽」の記号。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t045",
+      "g2-t052"
+    ],
+    "relatedNames": [
+      "相似",
+      "相似な図形",
+      "合同"
+    ]
+  },
+  {
+    "id": "g3-t047",
+    "name": "対応する頂点",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "相似な図形で、同じ位置関係にある頂点。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t045",
+      "g3-t048",
+      "g2-t054"
+    ],
+    "relatedNames": [
+      "相似な図形",
+      "相似比",
+      "対応する辺・角"
+    ]
+  },
+  {
+    "id": "g3-t048",
+    "name": "相似比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "相似な図形の、対応する辺の長さの比。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t047",
+      "g3-t057",
+      "g3-t060",
+      "g3-t059"
+    ],
+    "relatedNames": [
+      "相似",
+      "対応する頂点",
+      "面積比",
+      "体積比",
+      "表面積の比"
+    ]
+  },
+  {
+    "id": "g3-t049",
+    "name": "三角形の相似条件",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの三角形が相似だといえるための条件。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t050",
+      "g3-t051",
+      "g3-t052",
+      "g2-t055"
+    ],
+    "relatedNames": [
+      "相似",
+      "2組の角がそれぞれ等しい",
+      "2組の辺の比とその間の角",
+      "3組の辺の比",
+      "三角形の合同条件"
+    ]
+  },
+  {
+    "id": "g3-t050",
+    "name": "2組の角がそれぞれ等しい",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの三角形が相似になる条件の1つ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t049",
+      "g3-t044",
+      "g2-t054"
+    ],
+    "relatedNames": [
+      "三角形の相似条件",
+      "相似",
+      "対応する辺・角"
+    ]
+  },
+  {
+    "id": "g3-t051",
+    "name": "2組の辺の比とその間の角",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの三角形が相似になる条件の1つ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t049",
+      "g3-t044",
+      "g3-t048"
+    ],
+    "relatedNames": [
+      "三角形の相似条件",
+      "相似",
+      "相似比"
+    ]
+  },
+  {
+    "id": "g3-t052",
+    "name": "3組の辺の比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの三角形が相似になる条件の1つ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t049",
+      "g3-t044",
+      "g3-t048"
+    ],
+    "relatedNames": [
+      "三角形の相似条件",
+      "相似",
+      "相似比"
+    ]
+  },
+  {
+    "id": "g3-t053",
+    "name": "相似の証明",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの図形が相似であることを、根拠を使って示すこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t049",
+      "g2-t056",
+      "g2-t057",
+      "g2-t058"
+    ],
+    "relatedNames": [
+      "相似",
+      "三角形の相似条件",
+      "証明",
+      "仮定",
+      "結論"
+    ]
+  },
+  {
+    "id": "g3-t054",
+    "name": "平行線と線分の比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "平行線によってできる線分の長さの比についての関係。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t048",
+      "g2-t050",
+      "g3-t055"
+    ],
+    "relatedNames": [
+      "相似",
+      "相似比",
+      "平行線",
+      "中点連結定理"
+    ]
+  },
+  {
+    "id": "g3-t055",
+    "name": "中点連結定理",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "三角形の2辺の中点を結ぶ線分についての定理。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t054",
+      "g3-t044",
+      "g2-t050"
+    ],
+    "relatedNames": [
+      "平行線と線分の比",
+      "相似",
+      "平行線"
+    ]
+  },
+  {
+    "id": "g3-t056",
+    "name": "相似な図形の面積比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "相似な図形の面積どうしの比。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t045",
+      "g3-t048",
+      "g3-t057",
+      "g3-t061"
+    ],
+    "relatedNames": [
+      "相似な図形",
+      "相似比",
+      "面積比",
+      "相似比と面積比・体積比"
+    ]
+  },
+  {
+    "id": "g3-t057",
+    "name": "面積比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの図形の面積を比で表したもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t048",
+      "g3-t056",
+      "g3-t059",
+      "g3-t060"
+    ],
+    "relatedNames": [
+      "相似比",
+      "相似な図形の面積比",
+      "表面積の比",
+      "体積比"
+    ]
+  },
+  {
+    "id": "g3-t058",
+    "name": "相似な立体",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "形が同じで、大きさだけが違う立体。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t044",
+      "g3-t059",
+      "g3-t060",
+      "g3-t048"
+    ],
+    "relatedNames": [
+      "相似",
+      "表面積の比",
+      "体積比",
+      "相似比"
+    ]
+  },
+  {
+    "id": "g3-t059",
+    "name": "表面積の比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの立体の表面積を比で表したもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t058",
+      "g3-t048",
+      "g3-t057",
+      "g1-t086"
+    ],
+    "relatedNames": [
+      "相似な立体",
+      "相似比",
+      "面積比",
+      "表面積"
+    ]
+  },
+  {
+    "id": "g3-t060",
+    "name": "体積比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "2つの立体の体積を比で表したもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t058",
+      "g3-t048",
+      "g3-t057",
+      "g1-t085"
+    ],
+    "relatedNames": [
+      "相似な立体",
+      "相似比",
+      "面積比",
+      "体積"
+    ]
+  },
+  {
+    "id": "g3-t061",
+    "name": "相似比と面積比・体積比",
+    "grade": 3,
+    "unitId": "g3-souji",
+    "unit": "相似",
+    "category": "図形",
+    "summary": "相似比から、面積比や体積比との関係を表したもの。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t048",
+      "g3-t057",
+      "g3-t059",
+      "g3-t060"
+    ],
+    "relatedNames": [
+      "相似比",
+      "面積比",
+      "表面積の比",
+      "体積比"
+    ]
+  },
+  {
+    "id": "g3-t062",
+    "name": "円周角",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "円周上の点を頂点とし、両辺が円と交わる角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t063",
+      "g3-t064",
+      "g3-t066",
+      "g3-t068"
+    ],
+    "relatedNames": [
+      "中心角",
+      "弧",
+      "円周角の定理",
+      "直径に対する円周角"
+    ]
+  },
+  {
+    "id": "g3-t063",
+    "name": "中心角",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "円の中心を頂点とする角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t062",
+      "g3-t064",
+      "g3-t066"
+    ],
+    "relatedNames": [
+      "円周角",
+      "弧",
+      "円周角の定理"
+    ]
+  },
+  {
+    "id": "g3-t064",
+    "name": "弧",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "円周の2点にはさまれた部分。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t062",
+      "g3-t063",
+      "g3-t065",
+      "g3-t066"
+    ],
+    "relatedNames": [
+      "円周角",
+      "中心角",
+      "弦",
+      "円周角の定理"
+    ]
+  },
+  {
+    "id": "g3-t065",
+    "name": "弦",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "円周上の2点を結ぶ線分。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t064",
+      "g3-t062",
+      "g3-t063"
+    ],
+    "relatedNames": [
+      "弧",
+      "円周角",
+      "中心角"
+    ]
+  },
+  {
+    "id": "g3-t066",
+    "name": "円周角の定理",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "同じ弧に対する円周角は等しく、中心角の半分になるという定理。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t062",
+      "g3-t063",
+      "g3-t067",
+      "g3-t068",
+      "g3-t069"
+    ],
+    "relatedNames": [
+      "円周角",
+      "中心角",
+      "同じ弧に対する円周角",
+      "直径に対する円周角",
+      "円周角の定理の逆"
+    ]
+  },
+  {
+    "id": "g3-t067",
+    "name": "同じ弧に対する円周角",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "同じ弧を見込む円周角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t062",
+      "g3-t064",
+      "g3-t066"
+    ],
+    "relatedNames": [
+      "円周角",
+      "弧",
+      "円周角の定理"
+    ]
+  },
+  {
+    "id": "g3-t068",
+    "name": "直径に対する円周角",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "直径を見込む円周角で、90°になる角。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t062",
+      "g3-t066"
+    ],
+    "relatedNames": [
+      "円周角",
+      "円周角の定理"
+    ]
+  },
+  {
+    "id": "g3-t069",
+    "name": "円周角の定理の逆",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "ある角の関係から、4点が同じ円周上にあることを判断する考え方。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t066",
+      "g3-t070",
+      "g3-t062"
+    ],
+    "relatedNames": [
+      "円周角の定理",
+      "4点が同じ円周上にある条件",
+      "円周角"
+    ]
+  },
+  {
+    "id": "g3-t070",
+    "name": "4点が同じ円周上にある条件",
+    "grade": 3,
+    "unitId": "g3-en",
+    "unit": "円",
+    "category": "図形",
+    "summary": "4つの点が1つの円の円周上にあると判断できる条件。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t069",
+      "g3-t066",
+      "g3-t062"
+    ],
+    "relatedNames": [
+      "円周角の定理の逆",
+      "円周角の定理",
+      "円周角"
+    ]
+  },
+  {
+    "id": "g3-t071",
+    "name": "三平方の定理",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "直角三角形で、2つの短い辺の平方の和が斜辺の平方に等しくなる定理。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t072",
+      "g3-t073",
+      "g3-t074",
+      "g2-t069"
+    ],
+    "relatedNames": [
+      "斜辺",
+      "a^2+b^2=c^2",
+      "三平方の定理の逆",
+      "直角三角形"
+    ]
+  },
+  {
+    "id": "g3-t072",
+    "name": "斜辺",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "直角三角形で、直角の向かい側にある辺。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t071",
+      "g3-t073",
+      "g2-t069"
+    ],
+    "relatedNames": [
+      "三平方の定理",
+      "a^2+b^2=c^2",
+      "直角三角形"
+    ]
+  },
+  {
+    "id": "g3-t073",
+    "name": "a^2+b^2=c^2",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "直角三角形の3辺の長さの関係を表す式。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t071",
+      "g3-t072",
+      "g3-t074"
+    ],
+    "relatedNames": [
+      "三平方の定理",
+      "斜辺",
+      "三平方の定理の逆"
+    ]
+  },
+  {
+    "id": "g3-t074",
+    "name": "三平方の定理の逆",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "3辺の長さの関係から、直角三角形かどうかを判断する定理。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t071",
+      "g3-t073",
+      "g2-t069"
+    ],
+    "relatedNames": [
+      "三平方の定理",
+      "a^2+b^2=c^2",
+      "直角三角形"
+    ]
+  },
+  {
+    "id": "g3-t075",
+    "name": "2点間の距離",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "2つの点を結んだ線分の長さ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t076",
+      "g3-t071",
+      "g1-t066",
+      "g1-t044"
+    ],
+    "relatedNames": [
+      "座標平面上の距離",
+      "三平方の定理",
+      "距離",
+      "座標"
+    ]
+  },
+  {
+    "id": "g3-t076",
+    "name": "座標平面上の距離",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "座標で表された2点の間の長さ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t075",
+      "g3-t071",
+      "g1-t044",
+      "g1-t045",
+      "g1-t046"
+    ],
+    "relatedNames": [
+      "2点間の距離",
+      "三平方の定理",
+      "座標",
+      "x座標",
+      "y座標"
+    ]
+  },
+  {
+    "id": "g3-t077",
+    "name": "対角線の長さ",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "多角形や立体で、向かい合う頂点を結ぶ線分の長さ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t071",
+      "g3-t078",
+      "g3-t072"
+    ],
+    "relatedNames": [
+      "三平方の定理",
+      "空間における線分の長さ",
+      "斜辺"
+    ]
+  },
+  {
+    "id": "g3-t078",
+    "name": "空間における線分の長さ",
+    "grade": 3,
+    "unitId": "g3-sanheihou",
+    "unit": "三平方の定理",
+    "category": "図形",
+    "summary": "立体の中にある2点を結ぶ線分の長さ。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t071",
+      "g3-t077",
+      "g1-t072"
+    ],
+    "relatedNames": [
+      "三平方の定理",
+      "対角線の長さ",
+      "立体"
+    ]
+  },
+  {
+    "id": "g3-t079",
+    "name": "全数調査",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "調べたいものを、すべて調べる方法。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t080",
+      "g3-t081",
+      "g3-t082"
+    ],
+    "relatedNames": [
+      "標本調査",
+      "母集団",
+      "標本"
+    ]
+  },
+  {
+    "id": "g3-t080",
+    "name": "標本調査",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "全体の一部を調べて、全体の傾向を考える方法。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t079",
+      "g3-t081",
+      "g3-t082",
+      "g3-t085",
+      "g3-t087"
+    ],
+    "relatedNames": [
+      "全数調査",
+      "母集団",
+      "標本",
+      "無作為抽出",
+      "標本からの推定"
+    ]
+  },
+  {
+    "id": "g3-t081",
+    "name": "母集団",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "調査の対象となる全体。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t080",
+      "g3-t082",
+      "g3-t083",
+      "g3-t087"
+    ],
+    "relatedNames": [
+      "標本調査",
+      "標本",
+      "標本の大きさ",
+      "標本からの推定"
+    ]
+  },
+  {
+    "id": "g3-t082",
+    "name": "標本",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "母集団から取り出して実際に調べる一部。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t081",
+      "g3-t080",
+      "g3-t083",
+      "g3-t085"
+    ],
+    "relatedNames": [
+      "母集団",
+      "標本調査",
+      "標本の大きさ",
+      "無作為抽出"
+    ]
+  },
+  {
+    "id": "g3-t083",
+    "name": "標本の大きさ",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "標本にふくまれるデータの個数。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t082",
+      "g3-t081",
+      "g3-t080"
+    ],
+    "relatedNames": [
+      "標本",
+      "母集団",
+      "標本調査"
+    ]
+  },
+  {
+    "id": "g3-t084",
+    "name": "無作為に抽出する",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "かたよりが出ないように、ランダムに選び出すこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t085",
+      "g3-t082",
+      "g3-t086"
+    ],
+    "relatedNames": [
+      "無作為抽出",
+      "標本",
+      "乱数"
+    ]
+  },
+  {
+    "id": "g3-t085",
+    "name": "無作為抽出",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "母集団から、かたよりが出ないようにランダムに標本を選ぶこと。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t084",
+      "g3-t082",
+      "g3-t086",
+      "g3-t080"
+    ],
+    "relatedNames": [
+      "無作為に抽出する",
+      "標本",
+      "乱数",
+      "標本調査"
+    ]
+  },
+  {
+    "id": "g3-t086",
+    "name": "乱数",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "規則がないように並んだ数字。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t085",
+      "g3-t084",
+      "g3-t082"
+    ],
+    "relatedNames": [
+      "無作為抽出",
+      "無作為に抽出する",
+      "標本"
+    ]
+  },
+  {
+    "id": "g3-t087",
+    "name": "標本からの推定",
+    "grade": 3,
+    "unitId": "g3-hyouhon",
+    "unit": "標本調査",
+    "category": "データの活用",
+    "summary": "標本を調べた結果から、母集団のようすを予想すること。",
+    "status": "ok",
+    "formula": "",
+    "keywords": [],
+    "related": [
+      "g3-t080",
+      "g3-t081",
+      "g3-t082",
+      "g1-t097"
+    ],
+    "relatedNames": [
+      "標本調査",
+      "母集団",
+      "標本",
+      "平均値"
+    ]
   }
 ];
 const byId=Object.fromEntries(TERMS.map(t=>[t.id,t]));
@@ -2836,21 +6132,34 @@ const grid=document.getElementById('grid');
 const q=document.getElementById('q');
 const unitSelect=document.getElementById('unitSelect');
 const count=document.getElementById('count');
-let status='all';
+const sectionTitle=document.getElementById('sectionTitle');
+let grade='all';
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function normalized(t){return (t.name+' '+t.summary+' '+t.unit+' '+t.category+' '+t.keywords.join(' ')).toLowerCase()}
-
+function normalized(t){
+  const keywords=Array.isArray(t.keywords)?t.keywords.join(' '):'';
+  const relatedNames=Array.isArray(t.relatedNames)?t.relatedNames.join(' '):'';
+  return (t.name+' '+t.summary+' '+t.unit+' '+t.category+' '+keywords+' '+relatedNames).toLowerCase();
+}
+function updateUnits(){
+  const current=unitSelect.value;
+  const source=grade==='all'?TERMS:TERMS.filter(t=>String(t.grade)===grade);
+  const units=[...new Map(source.map(t=>[t.unitId,t.unit])).entries()];
+  unitSelect.innerHTML='<option value="all">すべての単元</option>'+
+    units.map(([id,name])=>`<option value="${esc(id)}">${esc(name)}</option>`).join('');
+  if([...unitSelect.options].some(o=>o.value===current)) unitSelect.value=current;
+}
 function render(){
   const query=q.value.trim().toLowerCase();
   const unit=unitSelect.value;
   const list=TERMS.filter(t=>{
+    if(grade!=='all'&&String(t.grade)!==grade)return false;
     if(unit!=='all'&&t.unitId!==unit)return false;
-    if(status!=='all'&&t.status!==status)return false;
     if(query&&!normalized(t).includes(query))return false;
     return true;
   });
   count.textContent=`${list.length} / ${TERMS.length}語`;
+  sectionTitle.textContent=grade==='all'?'1〜3年の数学用語':`${grade}年生の数学用語`;
   if(!list.length){
     grid.innerHTML='<div class="empty">条件に合う用語が見つかりませんでした。</div>';
     return;
@@ -2858,12 +6167,13 @@ function render(){
   grid.innerHTML=list.map(t=>`
     <button class="term-card" data-id="${t.id}">
       <div class="card-meta">
+        <span class="pill">${t.grade}年</span>
         <span class="pill">${esc(t.unit)}</span>
-        ${t.status==='revise'?'<span class="pill warn">要修正</span>':'<span class="pill">確認済み</span>'}
+        ${t.status==='revise'?'<span class="pill warn">要修正</span>':''}
       </div>
       <h3>${esc(t.name)}</h3>
       <p>${esc(t.summary)}</p>
-      <div class="card-bottom">解説スライドを見る →</div>
+      <div class="card-bottom">詳しく見る →</div>
     </button>`).join('');
 }
 
@@ -2871,41 +6181,76 @@ function openDetail(id){
   const t=byId[id]; if(!t)return;
   document.getElementById('detailTitle').textContent=t.name;
   document.getElementById('detailSummary').textContent=t.summary;
-  document.getElementById('detailMeta').innerHTML=`<span class="pill">${esc(t.unit)}</span><span class="pill">${esc(t.category)}</span>${t.status==='revise'?'<span class="pill warn">要修正</span>':'<span class="pill">確認済み</span>'}`;
+  document.getElementById('detailMeta').innerHTML=
+    `<span class="pill">${t.grade}年</span><span class="pill">${esc(t.unit)}</span><span class="pill">${esc(t.category)}</span>`+
+    (t.status==='revise'?'<span class="pill warn">要修正</span>':'');
   const f=document.getElementById('detailFormula');
   f.innerHTML=t.formula||'';
   f.style.display=t.formula?'block':'none';
-  document.getElementById('keywords').innerHTML=t.keywords.length?t.keywords.map(x=>`<span class="chip keyword">${esc(x)}</span>`).join(''):'<span class="chip keyword">登録なし</span>';
-  document.getElementById('related').innerHTML=t.related.length?t.related.map(r=>{
-    const rt=byId[r]; return rt?`<button class="chip related-chip" data-id="${rt.id}">${esc(rt.name)}</button>`:'';
-  }).join(''):'<span class="chip keyword">登録なし</span>';
+
+  const keywords=Array.isArray(t.keywords)?t.keywords:[];
+  document.getElementById('keywords').innerHTML=keywords.length
+    ?keywords.map(x=>`<span class="chip keyword">${esc(x)}</span>`).join('')
+    :'<span class="chip keyword">登録なし</span>';
+
+  const related=Array.isArray(t.related)?t.related:[];
+  const relatedNames=Array.isArray(t.relatedNames)?t.relatedNames:[];
+  const relatedHtml=related.length
+    ?related.map((r,i)=>{
+      const rt=byId[r];
+      if(rt)return `<button class="chip related-chip" data-id="${rt.id}">${esc(rt.name)} <small>${rt.grade}年</small></button>`;
+      const name=relatedNames[i];
+      return name?`<span class="chip keyword">${esc(name)}</span>`:'';
+    }).join('')
+    :'<span class="chip keyword">登録なし</span>';
+  document.getElementById('related').innerHTML=relatedHtml;
+
   const slideBlock=document.getElementById('slideLinkBlock');
   if(t.slideUrl){
     slideBlock.hidden=false;
-    slideBlock.innerHTML=`<a class="slide-link" href="${t.slideUrl}" target="_blank" rel="noopener">▶ 解説スライドを見る</a>`;
+    slideBlock.innerHTML=`<a class="slide-link" href="${esc(t.slideUrl)}" target="_blank" rel="noopener">▶ 解説スライドを見る</a>`;
   }else{
     slideBlock.hidden=true;
     slideBlock.innerHTML='';
   }
+
   document.getElementById('notice').hidden=t.status!=='revise';
-  overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
   if(window.MathJax?.typesetPromise&&t.formula) MathJax.typesetPromise([f]).catch(()=>{});
 }
 
 function closeDetail(){
-  overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
 }
 
-grid.addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openDetail(b.dataset.id)});
-document.getElementById('related').addEventListener('click',e=>{const b=e.target.closest('.related-chip');if(b)openDetail(b.dataset.id)});
-q.addEventListener('input',render);unitSelect.addEventListener('change',render);
+grid.addEventListener('click',e=>{
+  const b=e.target.closest('[data-id]');
+  if(b)openDetail(b.dataset.id);
+});
+document.getElementById('related').addEventListener('click',e=>{
+  const b=e.target.closest('.related-chip');
+  if(b)openDetail(b.dataset.id);
+});
+q.addEventListener('input',render);
+unitSelect.addEventListener('change',render);
+
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
-  status=b.dataset.status;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));render();
+  grade=b.dataset.grade;
+  unitSelect.value='all';
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));
+  updateUnits();
+  render();
 }));
+
 document.getElementById('closeBtn').addEventListener('click',closeDetail);
 overlay.addEventListener('click',e=>{if(e.target===overlay)closeDetail()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+
+updateUnits();
 render();
 </script>
 </body>
